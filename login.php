@@ -57,23 +57,11 @@
 	}
 
 	$db = @new mysqli('localhost', 'obiwan11880', 'Porsche845', 'obiwan11880');
-	$sql = 'SELECT
-    	username,
-	firstname,
-	lastname,
-	position,
-    	password,
-	reading,
-	writing
-	FROM
-    	users';
+	$sql = 'SELECT * FROM users INNER JOIN rollen ON users.rollenid = rollen.id WHERE username=\''.$_SESSION['user'].'\' AND password=\''.$_SESSION['password'].'\';';
 	$result = $db->query($sql);
 	$userfound = false;
-	while ($row = $result->fetch_assoc()){
-		if ($_SESSION['user']==$row['username'] and $_SESSION['password']==$row['password']){
+	if ($row = $result->fetch_assoc()){
 		$userfound = true;
-		break;
-		}
 	}
 
 
