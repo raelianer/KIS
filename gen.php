@@ -74,4 +74,53 @@ $sql = "CREATE TABLE IF NOT EXISTS `kis`.`formular` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+
+
+
+$sql = "INSERT INTO `kis`.`users` (`userid`, `rollenid`, `username`, `password`, `firstname`, `lastname`) VALUES (NULL, \'1\', \'mueller\', \'abc\', \'Hans\', \'Müller\');";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "INSERT INTO `kis`.`users` (`userid`, `rollenid`, `username`, `password`, `firstname`, `lastname`) VALUES (NULL, \'2\', \'admin\', \'123\', \'Klaus\', \'Maier\');";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "INSERT INTO `kis`.`users` (`userid`, `rollenid`, `username`, `password`, `firstname`, `lastname`) VALUES (NULL, \'3\', \'schmidt\', \'xyz\', \'Harald\', \'Schmidt\');";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+
+
+$sql = "INSERT INTO `kis`.`rollen` (`id`, `position`, `read`, `write`) VALUES (NULL, \'Chefarzt\', \'1\', \'1\');";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "INSERT INTO `kis`.`rollen` (`id`, `position`, `read`, `write`) VALUES (NULL, \'Administrator\', \'0\', \'0\');";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "INSERT INTO `kis`.`rollen` (`id`, `position`, `read`, `write`) VALUES (NULL, \'Arzthelfer\', \'1\', \'0\');";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+
+
+
+
+$sql = "INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, \'Max\', \'Mustermann\', \'1980-08-15\', NULL);";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, \'Paul\', \'Panta\', \'1972-01-25\', NULL);";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, \'Peter\', \'Pollmann\', \'1954-02-05\', NULL);";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, \'Bernd\', \'Bäcker\', \'1960-02-10\', NULL);";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
 ?>

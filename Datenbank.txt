@@ -8,6 +8,13 @@ CREATE TABLE `kis`.`users` (
 UNIQUE (
 `username` 
 
+
+INSERT INTO `kis`.`users` (`userid` ,`rollenid` ,`username` ,`password` ,`firstname` ,`lastname`) VALUES (NULL , '1', 'mueller', 'abc', 'Hans', 'Müller');
+INSERT INTO `kis`.`users` (`userid`, `rollenid`, `username`, `password`, `firstname`, `lastname`) VALUES (NULL, '2', 'admin', '123', 'Klaus', 'Maier');
+INSERT INTO `kis`.`users` (`userid`, `rollenid`, `username`, `password`, `firstname`, `lastname`) VALUES (NULL, '3', 'schmidt', 'xyz', 'Harald', 'Schmidt');
+
+
+
 CREATE TABLE `kis`.`rollen` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 `position` VARCHAR( 32 ) NOT NULL ,
@@ -17,6 +24,11 @@ UNIQUE (
 `position`
 )
 
+INSERT INTO `kis`.`rollen` (`id`, `position`, `read`, `write`) VALUES (NULL, 'Chefarzt', '1', '1');
+INSERT INTO `kis`.`rollen` (`id`, `position`, `read`, `write`) VALUES (NULL, 'Administrator', '0', '0');
+INSERT INTO `kis`.`rollen` (`id`, `position`, `read`, `write`) VALUES (NULL, 'Arzthelfer', '1', '0');
+
+
 CREATE TABLE `kis`.`patient` (
 `patientid` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `firstname` VARCHAR( 32 ) NOT NULL ,
@@ -25,19 +37,11 @@ CREATE TABLE `kis`.`patient` (
 `formularid` INT NULL
 ) ENGINE = InnoDB;
 
-insert into users values (1 ,'Müller', 'abc','Hans', 'Müller', 'Chefarzt', true, true);
-insert into users values (2 ,'Admin', '123','Klaus', 'Maier', 'Administrator', false, false);
-insert into users values (3 ,'Schmidt', 'xyz','Harald', 'Schmidt', 'Arzthelfer', true, false);
 
-
-
-
-
-
-insert into patient values (1, 'Max', 'Mustermann', '1980-08-15', 0);
-insert into patient values (2, 'Paul', 'Panta', '1972-01-25', 0);
-insert into patient values (3, 'Peter', 'Pollmann', '1954-02-05', 0);
-insert into patient values (4, 'Bernd', 'Bäcker', '1960-02-10', 0);
+INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, 'Max', 'Mustermann', '1980-08-15', NULL);
+INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, 'Paul', 'Panta', '1972-01-25', NULL);
+INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, 'Peter', 'Pollmann', '1954-02-05', NULL);
+INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, 'Bernd', 'Bäcker', '1960-02-10', NULL);
 
 
 
