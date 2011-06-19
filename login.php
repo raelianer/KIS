@@ -5,11 +5,7 @@
 	echo '<form action="weiter.php?PHPSESSID="'.session_id().' method="post">';
 	echo '<fieldset>';
         echo '<legend>Patienten- und Formularauswahl</legend>';
-	$sql2 = 'SELECT
-	patientid,
-	firstname,
-	lastname,
-	savedformular
+	$sql2 = 'SELECT *
 	FROM
     	patient';
 	$result = $db->query($sql2);
@@ -17,7 +13,7 @@
 		while ($row = $result->fetch_assoc()){
 		     echo '<option value="'.$row['patientid'].'">'.'ID: '.$row['patientid'].' '.$row['firstname'].' '.$row['lastname'];
 
-			  if ($row['savedformular']) echo ' - Formular prätherapeutische Prostatakonferenz gespeichert';
+			  if ($row['formularid']) echo ' - Formular prätherapeutische Prostatakonferenz gespeichert';
 			else 
 			  echo ' - Es exisistiert bisher kein gespeichertes Formular';
 
@@ -67,16 +63,16 @@
 
 	if ($userfound){
 		$_SESSION['permission'] = true;
-		$_SESSION['reading'] = $row['reading'];
-		$_SESSION['writing'] = $row['writing'];
+		$_SESSION['reading'] = $row['read'];
+		$_SESSION['writing'] = $row['write'];
 		echo 'Vorname: '.$row['firstname'].'<br>';
 		echo 'Nachname: '.$row['lastname'].'<br>';
 		echo 'Rolle: '.$row['position'].'<br>';
 		echo 'Leserecht: ';
-		if ($row['reading']) echo 'Ja'.'<br>'; else echo 'Nein'.'<br>';
+		if ($row['read']) echo 'Ja'.'<br>'; else echo 'Nein'.'<br>';
 		
 		echo 'Bearbeitungsrecht: ';
-		if ($row['writing']) echo 'Ja'.'<br>'; else echo 'Nein'.'<br>';
+		if ($row['write']) echo 'Ja'.'<br>'; else echo 'Nein'.'<br>';
   	        echo '</fieldset><br>';
 		anzeigenFormular();
 	}

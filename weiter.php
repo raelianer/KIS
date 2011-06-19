@@ -1,12 +1,7 @@
 <?php
 	function anzeigen(){
 	$db = @new mysqli('localhost', 'obiwan11880', 'Porsche845', 'obiwan11880');
-	$sql = 'SELECT
-	firstname,
-	lastname,
-	patientid,
-	geb,
-	savedformular
+	$sql = 'SELECT *
 	FROM
     	patient where patientid='.$_SESSION['auswahl'];
 	$result = $db->query($sql);
@@ -14,7 +9,7 @@
 
 
 
-   if ($row['savedformular']==false){
+   if ($row['formularid']==false){
      if($_SESSION['writing']){
 		echo '<form action="speichern.php?PHPSESSID='.session_id().'" method="post">';
 		echo '<div id="headline">Protokoll prätherapeutische Prostatakonferenz</div>';
