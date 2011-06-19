@@ -1,14 +1,24 @@
 <?php
 error_reporting(E_ALL);
 $db = new mysqli('localhost', 'root', '');
+
 $sql = "DROP DATABASE `kis`;";
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen: " . mysql_error());
+
 $sql = "CREATE DATABASE `kis`;";
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen: " . mysql_error());
-$sql = "CREATE DATABASE `kis`;";
-$sql = "CREATE TABLE `kis`.`user` (`ID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `user` VARCHAR(32) NOT NULL, `password` VARCHAR(32) NOT NULL, UNIQUE (`user`)) ENGINE = InnoDB;";
+
+$sql = "CREATE TABLE `kis`.`rollen` (`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `position` VARCHAR(32) NOT NULL, `read` BOOLEAN NOT NULL, `write` BOOLEAN NOT NULL, UNIQUE (`position`)) ENGINE = InnoDB;";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "CREATE TABLE `kis`.`users` (`userid` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `rollenid` INT NOT NULL, `username` VARCHAR(32) NOT NULL, `password` VARCHAR(32) NOT NULL, `firstname` VARCHAR(32) NOT NULL, `lastname` VARCHAR(32) NOT NULL, UNIQUE (`username`)) ENGINE = InnoDB;";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen: " . mysql_error());
+
+$sql = "CREATE TABLE `kis`.`patient` (`patientid` INT NOT NULL AUTO_INCREMENT PRIMARY KEY, `firstname` VARCHAR(32) NOT NULL, `lastname` VARCHAR(32) NOT NULL, `birth` DATE NOT NULL, `formularid` INT NULL) ENGINE = InnoDB;";
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen: " . mysql_error());
 
