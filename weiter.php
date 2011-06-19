@@ -29,7 +29,7 @@
 	echo '</div>';
 	echo '<div id="box3">';
 	echo '<label for="vorname">Geb.Datum: </label>';
-	echo '<input type="text" name="gebdat" maxlength="10" size="9" disabled="disabled"  value="'.$row['geb'].'"/>';
+	echo '<input type="text" name="gebdat" maxlength="10" size="9" disabled="disabled"  value="'.$row['birth'].'"/>';
 	echo '</div>';
 		echo '</fieldset>';
 	   echo '</div>';
