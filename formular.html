@@ -1,0 +1,146 @@
+
+
+	<div id="label">
+		<fieldset>
+		   <legend>Biopsie</legend>
+			<label><input type="checkbox" name="präther" value="1" /> Prätherapeutisch</label><br />
+			PSA-Wert: <input type="text" name="psawert" id="name" size="5" />
+			 ng/ml, Datum: <input type="text" name="psadatum" id="name" size="5" /><br/>
+			Freies PSA <input type="text" name="psafrei" id="name" size="5" /> ng/ml, Quotient frei/gesamt - PSA<br/>
+			Prostatavolumen gesamte Prostata <input type="text" name="prostatavol" id="name" size="5" /> ccm, Übergangszone <input type="text" name="uzone" id="name" size="5" /> cmm
+
+		</fieldset>
+	</div>
+
+
+<div id="label">
+		<fieldset>
+		   <legend>Digitale Palpation</legend>
+		<table>
+  		   <tr>
+			<td style="vertical-align:top;">
+			<label><input type="radio" name="palp" value="1" /> normal</label> <label>
+				<input type="radio" name="palp" value="2" /> dubios</label>
+				<label><input type="radio" name="palp" value="3" /> suspekt</label>
+				<label><input type="radio" name="palp" value="4" /> V.a. Organüberschreitung, Lokalisation:</label>
+			</td>
+			<td>
+				<textarea name="statement1" cols="30" rows="7"></textarea>
+			</td>
+		   </tr>
+		</table>
+		</fieldset>
+	</div>
+
+
+<div id="label">
+		<fieldset>
+ 		<legend>Transrektaler Ultraschall</legend>
+		<table>
+  		   <tr>
+			<td style="vertical-align:top;">
+			<label><input type="radio" name="ultra" value="1" /> normal</label> <label>
+				<input type="radio" name="ultra" value="2" /> dubios</label>
+				<label><input type="radio" name="ultra" value="3" /> suspekt</label>
+				,Lokalisation:
+			</td>
+			<td>
+				<textarea name="statement2" cols="30" rows="7"></textarea>
+			</td>
+		   </tr>
+		</table>
+		International Prostate Syndrom Score: <input type="text" name="ipostsynd" id="name" size="5" />
+		(0-35)<br/>
+		Körpergewicht: <input type="text" name="kgewicht" id="name" size="5" /> kg, 
+		Körperlänge: <input type="text" name="klaenge" id="name" size="5" /> cm
+		</fieldset>
+	</div>
+
+	<div id="label">
+		<fieldset>
+ 		<legend>Body-Mass-Index</legend>
+		Der Wert wird automatisch berechnet
+		</fieldset>
+	</div>
+
+	<div id="label">
+		<fieldset>
+ 		<legend>PSA-Vorwerte, Datum</legend>
+		Vorwerte: <input type="text" name="psavorwert" id="name" size="10" />
+		Datum: <input type="text" name="psavorwert" id="name" size="10" />
+		</fieldset>
+	</div>
+
+
+	<div id="label">
+		<fieldset>
+ 		<legend>Biopsie-Ergebnis</legend>
+		Wieviele Biopsien zeigen PCa?<br/>
+		<label><input type="checkbox" name="pca" value="1" onclick="
+if (this.checked) {document.getElementById('pca1').disabled='';document.getElementById('pca2').disabled='';}
+else {document.getElementById('pca1').disabled='disabled';document.getElementById('pca2').disabled='disabled';}
+"/> Positiv</label>
+		<input type="text" name="pcapos" id="pca1" size="5" disabled="disabled" />/<input type="text" name="pcapos2" id="pca2" size="5" disabled="disabled" /><br/>
+		<label><input type="checkbox" name="pin" value="1" onclick="
+if (this.checked) {document.getElementById('pin1').disabled='';document.getElementById('pin2').disabled='';}
+else {document.getElementById('pin1').disabled='disabled';document.getElementById('pin2').disabled='disabled';}" /> PIN</label>
+		<input type="text" name="pin1" id="pin1" size="5" disabled="disabled" />/<input type="text" name="pin2" id="pin2" size="5" disabled="disabled"/><br/>
+		<label><input type="checkbox" name="stgrprost" value="1" /> Stärkergradige Prostatitis</label><br/><br/>
+		Gleason:<input type="text" name="gleason" id="name" size="5" />+<input type="text" name="gleason2" id="name" size="5" />
+		=<input type="text" name="gleason3" id="name" size="5" disabled="disabled" /><br/>
+
+		Helpap-Grad:
+		<select name="helpap" style="width: 60px;">
+			<option> </option>
+			<option> G1a</option>
+			<option> G1b</option>
+			<option> G11a</option>
+			<option> G11b</option>
+			<option> G111a</option>
+			<option> G111b</option>
+		</select><br>
+		PIN 3&deg;:
+		<select name="listepin" style="width: 60px;">
+			<option> </option>
+			<option> PIN 1</option>
+			<option>PIN 2</option>
+			<option>PIN 3</option>
+		</select><br>
+		<label><input type="checkbox" name="aah" value="1" /> AAH</label><br/>
+		<label><input type="checkbox" name="benigne" value="1" /> Benigne</label><br/>
+		<table>
+  		   <tr>
+			<td style="vertical-align:top;">
+			Kommentar:
+			</td>
+			<td>
+				<textarea name="statement3" cols="30" rows="7"></textarea>
+			</td>
+		   </tr>
+		</table><br/>
+		In. <input type="text" name="in" id="name" size="5" />/<input type="text" name="in2" id="name" size="5" /> Stanzen, Details siehe "Befundbericht-Prostatabiopsie"
+		</fieldset>
+	</div>
+
+
+
+
+<div id="label">
+		<fieldset>
+ 		<legend>Empfehlung</legend>
+		Wieviele Biopsien zeigen PCa?<br/>
+		<label><input type="checkbox" name="skelett" value="1" /> Skelettszintigramm</label><br/>
+		<label><input type="checkbox" name="besprechen" value="1" /> Besprechung der Therapieoptionen, z.B. radikale prostatektonomie, Radiatio, Androgenentzug</label><br/>
+		<label><input type="checkbox" name="rebiopsie" value="1" /> Re-Biopsie in 3-6 Monaten</label><br/>
+		<label><input type="checkbox" name="radikalepr" value="1" /> radikale Prostatekonomie</label><br/><br/>
+		<label><input type="checkbox" name="bestrahlung" value="1" onclick="
+if (this.checked) {document.getElementById('empf1').disabled='';document.getElementById('empf2').disabled='';document.getElementById('empf3').disabled='';} else {document.getElementById('empf1').disabled='true';document.getElementById('empf2').disabled='true';document.getElementById('empf3').disabled='true';}" /> Bestrahlung</label><br/>
+		<div id="tab">
+		<label><input type="checkbox" name="extern" id="empf2" value="1" disabled = true /> extern</label><br/>
+		<label><input type="checkbox" name="brachth" id="empf3" value="1" disabled = true /> HDR-Brachytherapie möglich</label><br/>
+		<label><input type="checkbox" name="ldrbrach" id="empf1" value="1" disabled = true /> LDR-Brachytherapie möglich</label><br/><br/>
+		</div>
+		<label><input type="checkbox" name="activesur" value="1" /> "Active Surveillance"</label>
+		</fieldset>
+	</div>
+	<br/>

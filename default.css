@@ -1,0 +1,127 @@
+	body{
+	background-color: #DEEAF0;
+	text-align: center;
+	}
+
+	#head{
+	margin: 0px auto;
+	margin-top: 40px;
+	width: 1000px;
+	height:30px;
+	text-align: left;
+	font-size: 20px;
+	font-weight:bold;
+	background-color: #DEEAF0;
+	box-shadow: 0px 0px 20px grey;
+	text-align: left;
+	}
+	
+	#headline{
+		text-align: center;
+		font-weight:bold;
+		margin-bottom: 20px;	
+	}
+
+	select{
+	width: 500px;
+	}
+
+	#label{
+	margin: 0px auto;
+	padding-top: 20px;
+	width: 990px;
+
+	}
+
+	fieldset{
+	padding: 10px;
+	width:900px;
+	margin: 0px auto;
+	margin-top: 0px;
+	}
+
+	#box{
+	margin: 0px auto;
+	padding: 30px;
+	height: 600px;
+	}
+
+	#box2{
+	margin: 0px auto;
+	padding-top: 30px;
+
+	}
+
+	#box3{
+	padding-top: 25px;
+	float:right;
+	width: 250px;
+	height: 60px;
+	}
+
+	#box1{
+	width: 250px;
+	height: 60px;
+	float:left;
+
+	}
+
+	#fiktiv{
+	font-size: 16px;
+	margin-left: 10px;
+	float:left;
+	font-weight:bold;
+	}
+
+	#content{
+	margin: 0px auto;
+	margin-bottom: 80px;
+	padding-bottom: 80px;
+	width: 1000px;
+	background-color: white;
+	box-shadow: 0px 0px 20px grey;
+	text-align: left;
+	}
+
+	#menu {margin: 40px auto;
+		font-variant: small-caps;
+		font-weight: bold;
+		text-align: center;
+		font-size: 16px;
+	}
+
+	#clear {
+		clear: left;
+	}
+
+
+	#menu li a {
+		color:black;
+		padding: 0px 1em;
+		margin-right: 30px;
+		text-decoration: none; 
+		background-color:#00ffff;
+		box-shadow: 10px 4px 15px grey;
+	}
+	
+	#menu li a:hover {
+		background-color:#b0c4de;
+		color:#900;
+		box-shadow: 10px 4px 15px grey;
+	}
+	
+	#menu li {
+  		display: inline; 
+	}
+
+	#tab{
+	padding-left: 50px;
+	}
+
+	#savebutton{
+	padding: 10px;
+	width:900px;
+	margin: 0px auto;
+	margin-top: 0px;
+	text-align:left;
+	}

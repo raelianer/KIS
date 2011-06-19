@@ -1,0 +1,32 @@
+create table users (
+userid int not null auto_increment primary key,
+username varchar(20),
+password varchar(20),
+firstname varchar(20),
+lastname varchar(20),
+position varchar(20),
+reading boolean,
+writing boolean
+);
+
+insert into users values (1 ,'Müller', 'abc','Hans', 'Müller', 'Chefarzt', true, true);
+insert into users values (2 ,'Admin', '123','Klaus', 'Maier', 'Administrator', false, false);
+insert into users values (3 ,'Schmidt', 'xyz','Harald', 'Schmidt', 'Arzthelfer', true, false);
+
+
+
+
+
+create table patient (
+patientid int not null auto_increment primary key,
+firstname varchar(20),
+lastname varchar(20),
+geb date,
+savedformular boolean
+);
+
+insert into patient values (1, 'Max', 'Mustermann', '1980-08-15', 0);
+insert into patient values (2, 'Paul', 'Panta', '1972-01-25', 0);
+insert into patient values (3, 'Peter', 'Pollmann', '1954-02-05', 0);
+insert into patient values (4, 'Bernd', 'Bäcker', '1960-02-10', 0);
+
