@@ -45,8 +45,6 @@
 	echo '<div id="box">';
 	echo '<fieldset>';
 	echo '<legend>Status: </legend>';
-
-
 	if ($_SESSION['permission'] == false){
 	$_SESSION['user']=$_POST['user'];
 	$_SESSION['password']=$_POST['password'];
@@ -59,15 +57,14 @@
 	if ($row = $result->fetch_assoc()){
 		$userfound = true;
 	}
-
-
 	if ($userfound){
+	echo '<div id="foto"><img src="fotos/foto'.$row['userid'].'.jpg" alt="foto" width="110" height="140"></div>';
 		$_SESSION['permission'] = true;
 		$_SESSION['reading'] = $row['read'];
 		$_SESSION['writing'] = $row['write'];
+		echo 'Rolle: '.$row['position'].'<br>';
 		echo 'Vorname: '.$row['firstname'].'<br>';
 		echo 'Nachname: '.$row['lastname'].'<br>';
-		echo 'Rolle: '.$row['position'].'<br>';
 		echo 'Leserecht: ';
 		if ($row['read']) echo 'Ja'.'<br>'; else echo 'Nein'.'<br>';
 		

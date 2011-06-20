@@ -50,6 +50,7 @@
 			echo '<fieldset>';
 		   echo 'Sie haben kein Schreibrecht für dieses Formular!<br>';
       	           echo '</fieldset>';
+		   for ($i=1;$i<=25;$i++) echo '<br>';
 			echo '</fieldset>';
         }
   }
@@ -73,6 +74,7 @@ else{
 			echo '<fieldset>';
 		   echo 'Sie haben kein Leserecht für dieses Formular!<br>';
       	           echo '</fieldset>';
+		   for ($i=1;$i<=25;$i++) echo '<br>';
 			echo '</fieldset>';
         }
 
