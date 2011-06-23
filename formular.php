@@ -1,8 +1,7 @@
 <?php
+include 'config.php';
 error_reporting(E_ALL);
-
-
-$db = new mysqli('localhost', 'root', '', 'kis');
+$db = new mysqli(HOST, USER, PASS, DB);
 
 $sql = "SELECT * FROM `formular` WHERE ID=1";
 $result = $db->query($sql)
