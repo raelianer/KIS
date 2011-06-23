@@ -28,19 +28,19 @@ $sql = "CREATE TABLE IF NOT EXISTS `kis`.`formular` (
   `Vorname` varchar(32) NOT NULL,
   `Geburtsdatum` date NOT NULL,
   `Praetherapeutisch` tinyint(1) NOT NULL,
-  `PSA` decimal(10,0) NOT NULL,
+  `PSA` float NOT NULL,
   `DatumPSA` date NOT NULL,
-  `FreiesPSA` decimal(10,0) NOT NULL,
-  `Prostatavolumen` decimal(10,0) NOT NULL,
-  `Uebergangszone` decimal(10,0) NOT NULL,
+  `FreiesPSA` float NOT NULL,
+  `Prostatavolumen` float NOT NULL,
+  `Uebergangszone` float NOT NULL,
   `DigitalePalpation` enum('normal','dubios','suspekt','VA') NOT NULL,
   `DigPalKommentar` text NOT NULL,
   `TransrektalerUltraschall` enum('normal','dubios','suspekt') NOT NULL,
   `TransUltraKommentar` text NOT NULL,
   `IPSS` int(11) NOT NULL,
-  `Koerpergewicht` decimal(10,0) NOT NULL,
-  `Koerperlaenge` decimal(10,0) NOT NULL,
-  `BMI` decimal(10,0) NOT NULL,
+  `Koerpergewicht` float NOT NULL,
+  `Koerperlaenge` float NOT NULL,
+  `BMI` float NOT NULL,
   `PSA-Vorwerte` text NOT NULL,
   `PSA-VorDatum` date NOT NULL,
   `Biopsie-Ergebnis` tinyint(1) NOT NULL,
@@ -121,6 +121,10 @@ $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen15: " . mysql_error());
 
 $sql = "INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, 'Bernd', 'Bäcker', '1960-02-10', NULL);";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen16: " . mysql_error());
+
+$sql = "INSERT INTO `kis`.`formular` (`ID`, `Name`, `Vorname`, `Geburtsdatum`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSA-Vorwerte`, `PSA-VorDatum`, `Biopsie-Ergebnis`, `Biopsie-pos-Fund`, `Biopsie-pos-Gesamt`, `PIN`, `PIN-Fund`, `PIN-Gesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `Re-Biopsie`, `PSA-Kontrolle`, `radikale-Prostatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `Active-Surveillance`) VALUES ('1', 'Hans', 'Wurst', '1962-06-20', '1', '5.3', '2011-06-08', '2', '31', '5', 'normal', 'fdgbsdfgsdg', 'dubios', 'asdlökfnaklösf', '52', '90', '1.85', '25', 'adfadfgbsfdagsdfg', '2011-05-02', '1', '3', '5', '5', '8', '10', '0', '2', '3', '4', 'b', 'a', '1', '0', 'vxcvyxcvyxcvyxxcvyxcv', '23', '56', '0', '0', '1', '1', '0', '0', '1', '1', '1', '1');";
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen16: " . mysql_error());
 ?>
