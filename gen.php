@@ -24,9 +24,6 @@ or die("Anfrage fehlgeschlagen5: " . mysql_error());
 
 $sql = "CREATE TABLE IF NOT EXISTS `kis`.`formular` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(32) NOT NULL,
-  `Vorname` varchar(32) NOT NULL,
-  `Geburtsdatum` date NOT NULL,
   `Praetherapeutisch` tinyint(1) NOT NULL,
   `PSA` float NOT NULL,
   `DatumPSA` date NOT NULL,

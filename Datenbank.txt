@@ -49,9 +49,6 @@ INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `for
 
 CREATE TABLE IF NOT EXISTS `formular` (
   `ID` int(11) NOT NULL,
-  `Name` varchar(32) NOT NULL,
-  `Vorname` varchar(32) NOT NULL,
-  `Geburtsdatum` date NOT NULL,
   `Praetherapeutisch` tinyint(1) NOT NULL,
   `PSA` decimal(10,0) NOT NULL,
   `DatumPSA` date NOT NULL,
