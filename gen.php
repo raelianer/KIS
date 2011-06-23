@@ -57,7 +57,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `kis`.`formular` (
   `PIN3` enum('a','b') NOT NULL,
   `AAH` tinyint(1) NOT NULL,
   `Benigne` tinyint(1) NOT NULL,
-  `Kommentar` text NOT NULL,
+  `BenigneKommentar` text NOT NULL,
   `In1` int(11) NOT NULL,
   `In2` int(11) NOT NULL,
   `Skelettszintigramm` tinyint(1) NOT NULL,

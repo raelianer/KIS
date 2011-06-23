@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>KIS Fiktiv</title>
+</head>
+<body>
+<form action="speichern.php" method="post">
+  <fieldset>
+    <legend>Patientendaten</legend>
+    <label>Name:
+      <input type="text" name="Name" value="Mustermann" />
+    </label>
+    <label>Vorname:
+      <input type="text" name="Vorname" value="Max"/>
+    </label>
+    <label>Geburtsdatum:
+      <input type="date" name="Geburtsdatum" value="1980-08-15"/>
+    </label>
+  </fieldset>
+  <fieldset>
+    <legend>Biopsie</legend>
+    <label>
+      <input type="checkbox" name="Praetherapeutisch" value="1" />
+      Prätherapeutisch</label>
+    <br />
+    <label>PSA:
+      <input type="text" name="PSA" />
+      ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), </label>
+    <label>Datum:
+      <input type="date" name="DatumPSA" />
+    </label>
+    <br/>
+    <label>Freies PSA:
+      <input type="text" name="FreiesPSA" />
+      ng/ml, Quotient frei/gesamt - PSA</label>
+    <br/>
+    <label>Prostatavolumen gesamte Prostata:
+      <input type="text" name="Prostatavolumen" />
+      ccm, </label>
+    <label>Übergangszone:
+      <input type="text" name="Uebergangszone" />
+      cmm</label>
+  </fieldset>
+  <fieldset>
+    <legend>Digitale Palpation</legend>
+    <label>
+      <input type="radio" name="DigitalePalpation" value="1" />
+      normal</label>
+    <label>
+      <input type="radio" name="DigitalePalpation" value="2" />
+      dubios</label>
+    <label>
+      <input type="radio" name="DigitalePalpation" value="3" />
+      suspekt</label>
+    <label>
+      <input type="radio" name="DigitalePalpation" value="4" />
+      V.a. Organüberschreitung, Lokalisation:</label>
+    <textarea name="DigPalKommentar"></textarea>
+  </fieldset>
+  <fieldset>
+    <legend>Transrektaler Ultraschall</legend>
+    <label>
+      <input type="radio" name="TransrektalerUltraschall" value="1" />
+      normal</label>
+    <label>
+      <input type="radio" name="TransrektalerUltraschall" value="2" />
+      dubios</label>
+    <label>
+      <input type="radio" name="TransrektalerUltraschall" value="3" />
+      suspekt, </label>
+    <label>Lokalisation:
+      <textarea name="TransUltraKommentar"></textarea>
+    </label>
+    <label>International Prostate Syndrom Score:
+      <input type="text" name="IPSS" />
+      (0-35)</label>
+    <br/>
+    <label>Körpergewicht:
+      <input type="text" name="Koerpergewicht" />
+      kg, </label>
+    <label>Körperlänge:
+      <input type="text" name="Koerperlaenge" />
+      cm</label>
+  </fieldset>
+  <fieldset>
+    <legend>Body-Mass-Index</legend>
+    <input type="text" name="BMI" value="automatisch berechnet"/>
+  </fieldset>
+  <fieldset>
+    <legend>PSA-Vorwerte, Datum</legend>
+    <label>PSA-Vorwerte:
+      <input type="text" name="PSA-Vorwerte" />
+    </label>
+    <label>Datum:
+      <input type="text" name="PSA-VorDatum" />
+    </label>
+  </fieldset>
+  <fieldset>
+    <legend>Biopsie-Ergebnis</legend>
+    Wieviele Biopsien zeigen PCa?<br/>
+    <label>
+      <input type="checkbox" name="Biopsie-Ergebnis" value="1" />
+      Positiv
+      <input type="text" name="Biopsie-pos-Fund" />
+      /
+      <input type="text" name="Biopsie-pos-Gesamt" />
+    </label>
+    <br/>
+    <label>
+      <input type="checkbox" name="PIN" value="1" />
+      PIN
+      <input type="text" name="PIN-Fund" />
+      /
+      <input type="text" name="PIN-Gesamt" />
+    </label>
+    <br/>
+    <label>
+      <input type="checkbox" name="Prostatitis" value="1" />
+      Stärkergradige Prostatitis</label>
+    <br/>
+    <br/>
+    <label>Gleason:
+      <input type="text" name="Gleason1" />
+      +
+      <input type="text" name="Gleason2" />
+      =
+      <input type="text" name="Gleason3" />
+    </label>
+    <br/>
+    <label>Helpap-Grad:
+      <select name="Helpap">
+        <option> </option>
+        <option> G1a</option>
+        <option> G1b</option>
+        <option> G11a</option>
+        <option> G11b</option>
+        <option> G111a</option>
+        <option> G111b</option>
+      </select>
+    </label>
+    <br>
+    <label>PIN 3&deg;:
+      <select name="PIN3">
+        <option> </option>
+        <option> PIN 1</option>
+        <option>PIN 2</option>
+        <option>PIN 3</option>
+      </select>
+    </label>
+    <br>
+    <label>
+      <input type="checkbox" name="AAH" value="1" />
+      AAH</label>
+    <br/>
+    <label>
+      <input type="checkbox" name="Benigne" value="1" />
+      Benigne</label>
+    <br/>
+    <label>Kommentar:
+      <textarea name="BenigneKommentar"></textarea>
+    </label>
+    <br/>
+    <label>In
+      <input type="text" name="In1" />
+      /
+      <input type="text" name="In2" />
+      Stanzen, Details siehe "Befundbericht-Prostatabiopsie"</label>
+  </fieldset>
+  <fieldset>
+    <legend>Empfehlung</legend>
+    Wieviele Biopsien zeigen PCa?<br/>
+    <label>
+      <input type="checkbox" name="Skelettszintigramm" value="1" />
+      Skelettszintigramm</label>
+    <br/>
+    <label>
+      <input type="checkbox" name="Besprechung" value="1" />
+      Besprechung der Therapieoptionen, z.B. radikale prostatektonomie, Radiatio, Androgenentzug</label>
+    <br/>
+    <label>
+      <input type="checkbox" name="Re-Biopsie" value="1" />
+      Re-Biopsie in 3-6 Monaten</label>
+    <br/>
+    <label>
+      <input type="checkbox" name="PSA-Kontrolle" value="1" />
+      PSA-Kontrolle, ggfs. Re-Biopsie</label>
+    <br/>
+    <label>
+      <input type="checkbox" name="radikale-Prostatektomie" value="1" />
+      radikale Prostatekonomie</label>
+    <br/>
+    <br/>
+    <label>
+      <input type="checkbox" name="Bestrahlung" value="1" />
+      Bestrahlung</label>
+    <br/>
+    <label>
+      <input type="checkbox" name="extern" value="1" />
+      extern</label>
+    <br/>
+    <label>
+      <input type="checkbox" name="HDR" value="1" />
+      HDR-Brachytherapie möglich</label>
+    <br/>
+    <label>
+      <input type="checkbox" name="LDR" id="empf1" value="1" />
+      LDR-Brachytherapie möglich</label>
+    <br/>
+    <br/>
+    <label>
+      <input type="checkbox" name="Active-Surveillance" value="1" />
+      "Active Surveillance"</label>
+  </fieldset>
+  <br/>
+  <input type="button" value="Zurück" name="goback">
+  <input type="submit" name="speichern" value="Formular speichern" />
+</form>
+</body>
+</html>
