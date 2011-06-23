@@ -1,7 +1,7 @@
 <?php
 
 	function anzeigenFormular(){
-	$db = @new mysqli('localhost', 'obiwan11880', 'Porsche845', 'obiwan11880');
+	$db = new mysqli(HOST, USER, PASS, DB);
 	echo '<form action="weiter.php?PHPSESSID="'.session_id().' method="post">';
 	echo '<fieldset>';
         echo '<legend>Patienten- und Formularauswahl</legend>';

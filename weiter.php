@@ -1,6 +1,6 @@
 <?php
 	function anzeigen(){
-	$db = @new mysqli('localhost', 'obiwan11880', 'Porsche845', 'obiwan11880');
+	$db = new mysqli(HOST, USER, PASS, DB);
 	$sql = 'SELECT *
 	FROM
     	patient where patientid='.$_SESSION['auswahl'];
@@ -19,7 +19,7 @@
 	   echo '<table>';
   		echo '<tr>';
  		   echo '<td><label for="name">Name: </label></td>';
- 		   echo '<td><input type="text" name="name" id="name" disabled="disabled" value="'.$row['lastname'].'" /></td>';
+ 		   echo '<td><input type="text" name="name" id="name" value="'.$row['lastname'].'" /></td>';
  		 echo '</tr>';
  		 echo '<tr>';
  		   echo '<td><label for="vorname">Vorname: </label></td>';

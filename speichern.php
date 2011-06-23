@@ -21,6 +21,7 @@
            echo $_SESSION['auswahl'];
 	   echo $_POST['vorname'];
 	   echo $_POST['name'];
+           echo $_POST['skelett'];
 	  
              if ($_SESSION['permission']){
 		if($_SESSION['writing']){
