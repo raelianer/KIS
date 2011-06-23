@@ -1,5 +1,6 @@
 <?php
 	function anzeigen(){
+	include 'config.php';
 	$db = new mysqli(HOST, USER, PASS, DB);
 	$sql = 'SELECT *
 	FROM
