@@ -24,6 +24,9 @@ or die("Anfrage fehlgeschlagen5: " . mysql_error());
 
 $sql = "CREATE TABLE IF NOT EXISTS `kis`.`formular` (
   `ID` int(11) NOT NULL,
+  `Name` varchar(32) NOT NULL,
+  `Vorname` varchar(32) NOT NULL,
+  `Geburtsdatum` date NOT NULL,
   `Praetherapeutisch` tinyint(1) NOT NULL,
   `PSA` float NOT NULL,
   `DatumPSA` date NOT NULL,
@@ -38,14 +41,14 @@ $sql = "CREATE TABLE IF NOT EXISTS `kis`.`formular` (
   `Koerpergewicht` float NOT NULL,
   `Koerperlaenge` float NOT NULL,
   `BMI` float NOT NULL,
-  `PSA-Vorwerte` text NOT NULL,
-  `PSA-VorDatum` date NOT NULL,
-  `Biopsie-Ergebnis` tinyint(1) NOT NULL,
-  `Biopsie-pos-Fund` int(11) NOT NULL,
-  `Biopsie-pos-Gesamt` int(11) NOT NULL,
+  `PSAVorwerte` text NOT NULL,
+  `PSAVorDatum` date NOT NULL,
+  `BiopsieErgebnis` tinyint(1) NOT NULL,
+  `BiopsieposFund` int(11) NOT NULL,
+  `BiopsieposGesamt` int(11) NOT NULL,
   `PIN` tinyint(1) NOT NULL,
-  `PIN-Fund` int(11) NOT NULL,
-  `PIN-Gesamt` int(11) NOT NULL,
+  `PINFund` int(11) NOT NULL,
+  `PINGesamt` int(11) NOT NULL,
   `Prostatitis` tinyint(1) NOT NULL,
   `Gleason1` int(11) NOT NULL,
   `Gleason2` int(11) NOT NULL,
@@ -59,14 +62,14 @@ $sql = "CREATE TABLE IF NOT EXISTS `kis`.`formular` (
   `In2` int(11) NOT NULL,
   `Skelettszintigramm` tinyint(1) NOT NULL,
   `Besprechung` tinyint(1) NOT NULL,
-  `Re-Biopsie` tinyint(1) NOT NULL,
-  `PSA-Kontrolle` tinyint(1) NOT NULL,
-  `radikale-Prostatektomie` tinyint(1) NOT NULL,
+  `ReBiopsie` tinyint(1) NOT NULL,
+  `PSAKontrolle` tinyint(1) NOT NULL,
+  `radikaleProstatektomie` tinyint(1) NOT NULL,
   `Bestrahlung` tinyint(1) NOT NULL,
   `extern` tinyint(1) NOT NULL,
   `HDR` tinyint(1) NOT NULL,
   `LDR` tinyint(1) NOT NULL,
-  `Active-Surveillance` tinyint(1) NOT NULL,
+  `ActiveSurveillance` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 $result = $db->query($sql)
@@ -121,7 +124,7 @@ $sql = "INSERT INTO `kis`.`patient` (`patientid`, `firstname`, `lastname`, `birt
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen16: " . mysql_error());
 
-$sql = "INSERT INTO `kis`.`formular` (`ID`, `Name`, `Vorname`, `Geburtsdatum`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSA-Vorwerte`, `PSA-VorDatum`, `Biopsie-Ergebnis`, `Biopsie-pos-Fund`, `Biopsie-pos-Gesamt`, `PIN`, `PIN-Fund`, `PIN-Gesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `Re-Biopsie`, `PSA-Kontrolle`, `radikale-Prostatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `Active-Surveillance`) VALUES ('1', 'Hans', 'Wurst', '1962-06-20', '1', '5.3', '2011-06-08', '2', '31', '5', 'normal', 'fdgbsdfgsdg', 'dubios', 'asdlökfnaklösf', '52', '90', '1.85', '25', 'adfadfgbsfdagsdfg', '2011-05-02', '1', '3', '5', '5', '8', '10', '0', '2', '3', '4', 'b', 'a', '1', '0', 'vxcvyxcvyxcvyxxcvyxcv', '23', '56', '0', '0', '1', '1', '0', '0', '1', '1', '1', '1');";
+$sql = "INSERT INTO `kis`.`formular` (`ID`, `Name`, `Vorname`, `Geburtsdatum`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSAVorwerte`, `PSAVorDatum`, `BiopsieErgebnis`, `BiopsieposFund`, `BiopsieposGesamt`, `PIN`, `PINFund`, `PINGesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `ReBiopsie`, `PSAKontrolle`, `radikaleProstatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `ActiveSurveillance`) VALUES ('1', 'Hans', 'Wurst', '1962-06-20', '1', '5.3', '2011-06-08', '2', '31', '5', 'normal', 'asdnfasjdflök', 'normal', 'asdgadsfgasfdgfsd', '52', '90', '1.85', '25', 'lkdsnfksdfandfsadnlf', '2011-05-02', '1', '1', '1', '1', '4', '7', '1', '2', '3', '4', 'b', 'a', '1', '1', 'adsfasdfasdfasdf', '23', '56', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');";
 $result = $db->query($sql)
-or die("Anfrage fehlgeschlagen16: " . mysql_error());
+or die("Anfrage fehlgeschlagen17: " . mysql_error());
 ?>
