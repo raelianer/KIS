@@ -238,21 +238,30 @@ echo'<form action="formular.php" method="post">
     <label>Helpap-Grad:
       <select name="Helpap">
         <option> </option>
-        <option> G1a</option>
-        <option> G1b</option>
-        <option> G11a</option>
-        <option> G11b</option>
-        <option> G111a</option>
-        <option> G111b</option>
+        <option'; if ($_POST['Helpap']=="G1a") echo" selected";
+		echo'> G1a</option>
+        <option'; if ($_POST['Helpap']=="G1b") echo" selected";
+		echo'> G1b</option>
+        <option'; if ($_POST['Helpap']=="G11a") echo" selected";
+		echo'> G11a</option>
+        <option'; if ($_POST['Helpap']=="G11b") echo" selected";
+		echo'> G11b</option>
+        <option'; if ($_POST['Helpap']=="G111a") echo" selected";
+		echo'> G111a</option>
+        <option'; if ($_POST['Helpap']=="G111b") echo" selected";
+		echo'> G111b</option>
       </select>
     </label>
     <br>
     <label>PIN 3&deg;:
       <select name="PIN3">
         <option> </option>
-        <option> PIN 1</option>
-        <option>PIN 2</option>
-        <option>PIN 3</option>
+        <option'; if ($_POST['PIN3']=="PIN 1") echo" selected";
+		echo'> PIN 1</option>
+        <option'; if ($_POST['PIN3']=="PIN 2") echo" selected";
+		echo'>PIN 2</option>
+        <option'; if ($_POST['PIN3']=="PIN 3") echo" selected";
+		echo'>PIN 3</option>
       </select>
     </label>
     <br>
