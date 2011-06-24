@@ -85,6 +85,7 @@ echo'<!DOCTYPE HTML>
 <title>KIS Fiktiv</title>
 </head>
 <body>';
+
 echo'<form action="formular.php" method="post">
   <fieldset>
     <legend>Patientendaten</legend>
@@ -127,29 +128,43 @@ echo'<form action="formular.php" method="post">
   <fieldset>
     <legend>Digitale Palpation</legend>
     <label>
-      <input type="radio" name="DigitalePalpation" value="1" />
+      <input type="radio" name="DigitalePalpation" value="normal" ';
+	  if ($_POST['DigitalePalpation']=='normal') echo 'checked="checked" ';
+	  echo '/>
       normal</label>
     <label>
-      <input type="radio" name="DigitalePalpation" value="2" />
+      <input type="radio" name="DigitalePalpation" value="dubios" ';
+	  if ($_POST['DigitalePalpation']=='dubios') echo 'checked="checked" ';
+	  echo '/>
       dubios</label>
     <label>
-      <input type="radio" name="DigitalePalpation" value="3" />
+      <input type="radio" name="DigitalePalpation" value="suspekt" ';
+	  if ($_POST['DigitalePalpation']=='suspekt') echo 'checked="checked" ';
+	  echo '/>
       suspekt</label>
     <label>
-      <input type="radio" name="DigitalePalpation" value="4" />
+      <input type="radio" name="DigitalePalpation" value="VA" ';
+	  if ($_POST['DigitalePalpation']=='VA') echo 'checked="checked" ';
+	  echo '/>
       V.a. Organüberschreitung, Lokalisation:</label>
     <textarea name="DigPalKommentar">'.$_POST['DigPalKommentar'].'</textarea>
   </fieldset>
   <fieldset>
     <legend>Transrektaler Ultraschall</legend>
     <label>
-      <input type="radio" name="TransrektalerUltraschall" value="1" />
+      <input type="radio" name="TransrektalerUltraschall" value="normal" ';
+	  if ($_POST['TransrektalerUltraschall']=='normal') echo 'checked="checked" ';
+	  echo '/>
       normal</label>
     <label>
-      <input type="radio" name="TransrektalerUltraschall" value="2" />
+      <input type="radio" name="TransrektalerUltraschall" value="dubios" ';
+	  if ($_POST['TransrektalerUltraschall']=='dubios') echo 'checked="checked" ';
+	  echo '/>
       dubios</label>
     <label>
-      <input type="radio" name="TransrektalerUltraschall" value="3" />
+      <input type="radio" name="TransrektalerUltraschall" value="suspekt" ';
+	  if ($_POST['TransrektalerUltraschall']=='suspekt') echo 'checked="checked" ';
+	  echo '/>
       suspekt, </label>
     <label>Lokalisation:
       <textarea name="TransUltraKommentar">'.$_POST['TransUltraKommentar'].'</textarea>
@@ -169,7 +184,8 @@ echo'<form action="formular.php" method="post">
     <legend>Body-Mass-Index</legend>';
 	$_POST['BMI'] = round($_POST['Koerpergewicht'] / ($_POST['Koerperlaenge']/100 * $_POST['Koerperlaenge']/100));
 	echo '
-    <input type="text" name="BMI" value="'.$_POST['BMI'].'" disabled /> (wird automatisch berechnet)
+    <input type="text" name="display" value="'.$_POST['BMI'].'" disabled /> (wird automatisch berechnet)
+	<input type="hidden" name="BMI" value="'.$_POST['BMI'].'">
   </fieldset>
   <fieldset>
     <legend>PSA-Vorwerte, Datum</legend>
@@ -218,26 +234,36 @@ echo'<form action="formular.php" method="post">
 	  $_POST['Gleason3'] = $_POST['Gleason1'] + $_POST['Gleason2'];
 	  echo '
       <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled />
+	  <input type="hidden" name="Gleason3" value="'.$_POST['Gleason3'].'">
     </label>
     <br/>
     <label>Helpap-Grad:
       <select name="Helpap">
         <option> </option>
-        <option> G1a</option>
-        <option> G1b</option>
-        <option> G11a</option>
-        <option> G11b</option>
-        <option> G111a</option>
-        <option> G111b</option>
+        <option'; if ($_POST['Helpap']=="G1a") echo" selected";
+		echo'> G1a</option>
+        <option'; if ($_POST['Helpap']=="G1b") echo" selected";
+		echo'> G1b</option>
+        <option'; if ($_POST['Helpap']=="G11a") echo" selected";
+		echo'> G11a</option>
+        <option'; if ($_POST['Helpap']=="G11b") echo" selected";
+		echo'> G11b</option>
+        <option'; if ($_POST['Helpap']=="G111a") echo" selected";
+		echo'> G111a</option>
+        <option'; if ($_POST['Helpap']=="G111b") echo" selected";
+		echo'> G111b</option>
       </select>
     </label>
     <br>
     <label>PIN 3&deg;:
       <select name="PIN3">
         <option> </option>
-        <option> PIN 1</option>
-        <option>PIN 2</option>
-        <option>PIN 3</option>
+        <option'; if ($_POST['PIN3']=="PIN 1") echo" selected";
+		echo'> PIN 1</option>
+        <option'; if ($_POST['PIN3']=="PIN 2") echo" selected";
+		echo'>PIN 2</option>
+        <option'; if ($_POST['PIN3']=="PIN 3") echo" selected";
+		echo'>PIN 3</option>
       </select>
     </label>
     <br>
@@ -333,3 +359,4 @@ echo'<form action="formular.php" method="post">
 </form>
 </body>
 </html>';
+?>
