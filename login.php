@@ -51,7 +51,8 @@
 	$_SESSION['password']=$_POST['password'];
 	}
 
-	$db = @new mysqli('localhost', 'obiwan11880', 'Porsche845', 'obiwan11880');
+	include 'config.php';
+	$db = new mysqli(HOST, USER, PASS, DB);
 	$sql = 'SELECT * FROM users INNER JOIN rollen ON users.rollenid = rollen.id WHERE username=\''.$_SESSION['user'].'\' AND password=\''.$_SESSION['password'].'\';';
 	$result = $db->query($sql);
 	$userfound = false;
