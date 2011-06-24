@@ -46,7 +46,7 @@
 	echo '<div id="box">';
 	echo '<fieldset>';
 	echo '<legend>Status: </legend>';
-	if ($_SESSION['permission'] == false){
+	if (!isset($_SESSION['permission'])||$_SESSION['permission']==false){
 	$_SESSION['user']=$_POST['user'];
 	$_SESSION['password']=$_POST['password'];
 	}
