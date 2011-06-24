@@ -184,7 +184,8 @@ echo'<form action="formular.php" method="post">
     <legend>Body-Mass-Index</legend>';
 	$_POST['BMI'] = round($_POST['Koerpergewicht'] / ($_POST['Koerperlaenge']/100 * $_POST['Koerperlaenge']/100));
 	echo '
-    <input type="text" name="BMI" value="'.$_POST['BMI'].'" disabled /> (wird automatisch berechnet)
+    <input type="text" name="display" value="'.$_POST['BMI'].'" disabled /> (wird automatisch berechnet)
+	<input type="hidden" name="BMI" value="'.$_POST['BMI'].'">
   </fieldset>
   <fieldset>
     <legend>PSA-Vorwerte, Datum</legend>
@@ -233,6 +234,7 @@ echo'<form action="formular.php" method="post">
 	  $_POST['Gleason3'] = $_POST['Gleason1'] + $_POST['Gleason2'];
 	  echo '
       <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled />
+	  <input type="hidden" name="Gleason3" value="'.$_POST['Gleason3'].'">
     </label>
     <br/>
     <label>Helpap-Grad:
