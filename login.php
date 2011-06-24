@@ -3,7 +3,7 @@
 	function anzeigenFormular(){
 	include 'config.php';
 	$db = new mysqli(HOST, USER, PASS, DB);
-	echo '<form action="weiter.php?PHPSESSID="'.session_id().' method="post">';
+	echo '<form action="formular.php?PHPSESSID="'.session_id().' method="post">';
 	echo '<fieldset>';
         echo '<legend>Patienten- und Formularauswahl</legend>';
 	$sql2 = 'SELECT *
