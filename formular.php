@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 include 'config.php';
 error_reporting(E_ALL);
 $db = new mysqli(HOST, USER, PASS, DB);
@@ -57,7 +57,7 @@ if ( (!isset( $_POST['submit'] )) && (!$row==null) ) {
 	$_POST['HDR'] = $row->HDR;
 	$_POST['LDR'] = $row->LDR;
 	$_POST['ActiveSurveillance'] = $row->ActiveSurveillance;
-} else {
+} else if ( (isset( $_POST['submit'] ) && !$speichern=false) ){ //TODO: Speichervariable
 // Benutzer hat Formular abgeschickt, aber leere Checkboxen sind nicht gleich 0!
 if (!isset( $_POST['Praetherapeutisch'] )) $_POST['Praetherapeutisch'] = 0;
 if (!isset( $_POST['BiopsieErgebnis'] )) $_POST['BiopsieErgebnis'] = 0;
@@ -76,6 +76,12 @@ if (!isset( $_POST['HDR'] )) $_POST['HDR'] = 0;
 if (!isset( $_POST['LDR'] )) $_POST['LDR'] = 0;
 if (!isset( $_POST['ActiveSurveillance'] )) $_POST['ActiveSurveillance'] = 0;
 
+} 
+
+if ($speichern=1){
+	$sql = "INSERT INTO `".DB."`.`formular` (`ID`, `Name`, `Vorname`, `Geburtsdatum`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSAVorwerte`, `PSAVorDatum`, `BiopsieErgebnis`, `BiopsieposFund`, `BiopsieposGesamt`, `PIN`, `PINFund`, `PINGesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `ReBiopsie`, `PSAKontrolle`, `radikaleProstatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `ActiveSurveillance`) VALUES (NULL, '".$_POST['Name']."', '".$_POST['Vorname']."', '".$_POST['Geburtsdatum']."', '".$_POST['Praetherapeutisch']."', '".$_POST['PSA']."', '".$_POST['DatumPSA']."', '".$_POST['FreiesPSA']."', '".$_POST['Prostatavolumen']."', '".$_POST['Uebergangszone']."', '".$_POST['DigitalePalpation']."', '".$_POST['DigPalKommentar']."', '".$_POST['TransrektalerUltraschall']."', '".$_POST['TransUltraKommentar']."', '".$_POST['IPSS']."', '".$_POST['Koerpergewicht']."', '".$_POST['Koerperlaenge']."', '".$_POST['BMI']."', '".$_POST['PSAVorwerte']."', '".$_POST['PSAVorDatum']."', '".$_POST['BiopsieErgebnis']."', '".$_POST['BiopsieposFund']."', '".$_POST['BiopsieposGesamt']."', '".$_POST['PIN']."', '".$_POST['PINFund']."', '".$_POST['PINGesamt']."', '".$_POST['Prostatitis']."', '".$_POST['Gleason1']."', '".$_POST['Gleason2']."', '".$_POST['Gleason3']."', '".$_POST['Helpap']."', '".$_POST['PIN3']."', '".$_POST['AAH']."', '".$_POST['Benigne']."', '".$_POST['BenigneKommentar']."', '".$_POST['In1']."', '".$_POST['In2']."', '".$_POST['Skelettszintigramm']."', '".$_POST['Besprechung']."', '".$_POST['ReBiopsie']."', '".$_POST['PSAKontrolle']."', '".$_POST['radikaleProstatektomie']."', '".$_POST['Bestrahlung']."', '".$_POST['extern']."', '".$_POST['HDR']."', '".$_POST['LDR']."', '".$_POST['ActiveSurveillance']."');";
+	$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen1: " . mysql_error());
 }
 
 echo'<!DOCTYPE HTML>
@@ -86,7 +92,7 @@ echo'<!DOCTYPE HTML>
 </head>
 <body>';
 
-echo'<form action="formular.php" method="post">
+echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
     <legend>Patientendaten</legend>
     <label>Name:
