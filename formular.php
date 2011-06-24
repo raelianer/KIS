@@ -85,6 +85,7 @@ echo'<!DOCTYPE HTML>
 <title>KIS Fiktiv</title>
 </head>
 <body>';
+
 echo'<form action="formular.php" method="post">
   <fieldset>
     <legend>Patientendaten</legend>
@@ -127,29 +128,43 @@ echo'<form action="formular.php" method="post">
   <fieldset>
     <legend>Digitale Palpation</legend>
     <label>
-      <input type="radio" name="DigitalePalpation" value="1" />
+      <input type="radio" name="DigitalePalpation" value="normal" ';
+	  if ($_POST['DigitalePalpation']=='normal') echo 'checked="checked" ';
+	  echo '/>
       normal</label>
     <label>
-      <input type="radio" name="DigitalePalpation" value="2" />
+      <input type="radio" name="DigitalePalpation" value="dubios" ';
+	  if ($_POST['DigitalePalpation']=='dubios') echo 'checked="checked" ';
+	  echo '/>
       dubios</label>
     <label>
-      <input type="radio" name="DigitalePalpation" value="3" />
+      <input type="radio" name="DigitalePalpation" value="suspekt" ';
+	  if ($_POST['DigitalePalpation']=='suspekt') echo 'checked="checked" ';
+	  echo '/>
       suspekt</label>
     <label>
-      <input type="radio" name="DigitalePalpation" value="4" />
+      <input type="radio" name="DigitalePalpation" value="VA" ';
+	  if ($_POST['DigitalePalpation']=='VA') echo 'checked="checked" ';
+	  echo '/>
       V.a. Organüberschreitung, Lokalisation:</label>
     <textarea name="DigPalKommentar">'.$_POST['DigPalKommentar'].'</textarea>
   </fieldset>
   <fieldset>
     <legend>Transrektaler Ultraschall</legend>
     <label>
-      <input type="radio" name="TransrektalerUltraschall" value="1" />
+      <input type="radio" name="TransrektalerUltraschall" value="normal" ';
+	  if ($_POST['TransrektalerUltraschall']=='normal') echo 'checked="checked" ';
+	  echo '/>
       normal</label>
     <label>
-      <input type="radio" name="TransrektalerUltraschall" value="2" />
+      <input type="radio" name="TransrektalerUltraschall" value="dubios" ';
+	  if ($_POST['TransrektalerUltraschall']=='dubios') echo 'checked="checked" ';
+	  echo '/>
       dubios</label>
     <label>
-      <input type="radio" name="TransrektalerUltraschall" value="3" />
+      <input type="radio" name="TransrektalerUltraschall" value="suspekt" ';
+	  if ($_POST['TransrektalerUltraschall']=='suspekt') echo 'checked="checked" ';
+	  echo '/>
       suspekt, </label>
     <label>Lokalisation:
       <textarea name="TransUltraKommentar">'.$_POST['TransUltraKommentar'].'</textarea>
@@ -333,3 +348,4 @@ echo'<form action="formular.php" method="post">
 </form>
 </body>
 </html>';
+?>
