@@ -1,7 +1,7 @@
 <?php
+	include 'config.php';
 
 	function anzeigenFormular(){
-	include 'config.php';
 	$db = new mysqli(HOST, USER, PASS, DB);
 	echo '<form action="formular.php?PHPSESSID="'.session_id().' method="post">';
 	echo '<fieldset>';
@@ -51,7 +51,6 @@
 	$_SESSION['password']=$_POST['password'];
 	}
 
-	include 'config.php';
 	$db = new mysqli(HOST, USER, PASS, DB);
 	$sql = 'SELECT * FROM users INNER JOIN rollen ON users.rollenid = rollen.id WHERE username=\''.$_SESSION['user'].'\' AND password=\''.$_SESSION['password'].'\';';
 	$result = $db->query($sql);
