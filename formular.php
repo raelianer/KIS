@@ -1,19 +1,36 @@
 <?php session_start();
-
 include 'config.php';
 error_reporting(E_ALL);
+
+/*
+	Fälle, die zu unterscheiden sind:
+	* Nutzer nicht eingeloggt
+		-> weiterleiten zur index.html
+		
+	ansonsten ist Nutzer eingeloggt
+	* keine FormularID -> leeres Formular anlegen
+	* FormularID liegt vor
+		-> Daten zur FormularID aus Datenbank laden
+	* Formular wurde an sich selbst abgeschickt
+		-> Korrektur der leeren Checkboxen und speichern?
+
+*/
+
+// Prüfen, ob der Nutzer eingeloggt ist
+if ( (!isset( $_SESSION['permission'] ) ) || $_SESSION['permission']==false) header('Location: index.html');
+
 $db = new mysqli(HOST, USER, PASS, DB);
 
-// Formular wurde vorher ausgewählt -> Daten aus Datenbank laden
-if (isset ($_POST['formular'])) {
-$sql = "SELECT * FROM `formular` WHERE ID=".$_POST['formular']."";
-$result = $db->query($sql)
-or die("Anfrage fehlgeschlagen1: " . mysql_error());
+// Beim ersten Aufruf soll noch nicht gespeichert werden
+if (!isset($_SESSION['save'])) $_SESSION['save'] = false;
 
-$row = $result->fetch_object();
+// Hier soll gespeichert werden
+if (isset($_SESSION['save'])) {
+	//speichern
+}
 
 // Formular wurde nicht ausgewählt und auch nicht an sich selbst geschickt
-} else if ( (!isset ($_POST['formular'])) && (!isset( $_POST['submit'] ))){
+if ( (!isset ($_POST['formular'])) && (!isset( $_POST['submit'] ))){
 	// Neues Formular anlegen
 	$_POST['Name'] = "";
 	$_POST['Vorname'] = "";
@@ -63,6 +80,7 @@ $row = $result->fetch_object();
 	$_POST['ActiveSurveillance'] = "";
 }
 
+
 // index -> passwort eingeben mit POST
 // login.php -> prüft Login-Daten und wählt Formular aus mit POST FormularID
 
@@ -73,11 +91,14 @@ $row = $result->fetch_object();
 //		$_POST['formular']; -> FormularID
 
 
-if ( (!isset( $_SESSION['permission'] ) ) || $_SESSION['permission']==false) header('Location: index.html');
+// Formular wurde vorher ausgewählt -> Daten aus Datenbank laden
+if (isset($_POST['formular'])) { // && (!$row==null) ) {
+$sql = "SELECT * FROM `formular` WHERE ID=".$_POST['formular']."";
+$result = $db->query($sql)
+or die("Anfrage fehlgeschlagen1: " . mysql_error());
 
+$row = $result->fetch_object();
 
-// Daten nicht vom Benutzer eingegeben, also aus Datenbank laden:
-if ( (!isset( $_POST['submit'] )) && (isset ($_POST['formular']) )) { // && (!$row==null) ) {
 	$_POST['Name'] = $row->Name;
 	$_POST['Vorname'] = $row->Vorname;
 	$_POST['Geburtsdatum'] = $row->Geburtsdatum;
@@ -124,7 +145,10 @@ if ( (!isset( $_POST['submit'] )) && (isset ($_POST['formular']) )) { // && (!$r
 	$_POST['HDR'] = $row->HDR;
 	$_POST['LDR'] = $row->LDR;
 	$_POST['ActiveSurveillance'] = $row->ActiveSurveillance;
-} else if ( (isset( $_POST['submit'] ) && !$speichern=false) ){ //TODO: Speichervariable
+} 
+
+// Formular wurde abgeschickt... Korrektur für leere Checkboxen:
+if (isset( $_POST['submit'] )) {
 // Benutzer hat Formular abgeschickt, aber leere Checkboxen sind nicht gleich 0!
 if (!isset( $_POST['Praetherapeutisch'] )) $_POST['Praetherapeutisch'] = 0;
 if (!isset( $_POST['BiopsieErgebnis'] )) $_POST['BiopsieErgebnis'] = 0;
@@ -142,14 +166,18 @@ if (!isset( $_POST['extern'] )) $_POST['extern'] = 0;
 if (!isset( $_POST['HDR'] )) $_POST['HDR'] = 0;
 if (!isset( $_POST['LDR'] )) $_POST['LDR'] = 0;
 if (!isset( $_POST['ActiveSurveillance'] )) $_POST['ActiveSurveillance'] = 0;
+}
 
-} 
 
-if ($speichern=1){
+if (isset( $_POST['submit'] )){
+	// vor dem Speichern noch prüfen?
+	
+	
 	$sql = "INSERT INTO `".DB."`.`formular` (`ID`, `Name`, `Vorname`, `Geburtsdatum`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSAVorwerte`, `PSAVorDatum`, `BiopsieErgebnis`, `BiopsieposFund`, `BiopsieposGesamt`, `PIN`, `PINFund`, `PINGesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `ReBiopsie`, `PSAKontrolle`, `radikaleProstatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `ActiveSurveillance`) VALUES (NULL, '".$_POST['Name']."', '".$_POST['Vorname']."', '".$_POST['Geburtsdatum']."', '".$_POST['Praetherapeutisch']."', '".$_POST['PSA']."', '".$_POST['DatumPSA']."', '".$_POST['FreiesPSA']."', '".$_POST['Prostatavolumen']."', '".$_POST['Uebergangszone']."', '".$_POST['DigitalePalpation']."', '".$_POST['DigPalKommentar']."', '".$_POST['TransrektalerUltraschall']."', '".$_POST['TransUltraKommentar']."', '".$_POST['IPSS']."', '".$_POST['Koerpergewicht']."', '".$_POST['Koerperlaenge']."', '".$_POST['BMI']."', '".$_POST['PSAVorwerte']."', '".$_POST['PSAVorDatum']."', '".$_POST['BiopsieErgebnis']."', '".$_POST['BiopsieposFund']."', '".$_POST['BiopsieposGesamt']."', '".$_POST['PIN']."', '".$_POST['PINFund']."', '".$_POST['PINGesamt']."', '".$_POST['Prostatitis']."', '".$_POST['Gleason1']."', '".$_POST['Gleason2']."', '".$_POST['Gleason3']."', '".$_POST['Helpap']."', '".$_POST['PIN3']."', '".$_POST['AAH']."', '".$_POST['Benigne']."', '".$_POST['BenigneKommentar']."', '".$_POST['In1']."', '".$_POST['In2']."', '".$_POST['Skelettszintigramm']."', '".$_POST['Besprechung']."', '".$_POST['ReBiopsie']."', '".$_POST['PSAKontrolle']."', '".$_POST['radikaleProstatektomie']."', '".$_POST['Bestrahlung']."', '".$_POST['extern']."', '".$_POST['HDR']."', '".$_POST['LDR']."', '".$_POST['ActiveSurveillance']."');";
 	$result = $db->query($sql)
 or die("Anfrage fehlgeschlagen1: " . mysql_error());
 }
+
 
 echo'<!DOCTYPE HTML>
 <html>
