@@ -21,9 +21,15 @@ if ( (!isset( $_SESSION['permission'] ) ) || $_SESSION['permission']==false) hea
 
 $db = new mysqli(HOST, USER, PASS, DB);
 
+	// FormularID retten:
+	if ( (isset($_POST['formular']))) {
+		echo"FormularID retten: ".$_POST['formular'];
+	$_SESSION['FormularID'] = $_POST['formular'];
+	}
 
 // Formular wurde nicht ausgewählt und auch nicht an sich selbst geschickt
-if ( (!isset ($_POST['formular'])) && (!isset( $_POST['submit'] ))){
+if ( (!isset($_SESSION['FormularID'])) && (!isset($_POST['submit'])) ){
+	echo"Neues Formular anlegen";
 	// Neues Formular anlegen
 	$_POST['Name'] = "";
 	$_POST['Vorname'] = "";
@@ -84,13 +90,10 @@ if ( (!isset ($_POST['formular'])) && (!isset( $_POST['submit'] ))){
 //		$_POST['formular']; -> FormularID
 
 
-// Formular wurde vorher ausgewählt -> Daten aus Datenbank laden
-if (isset($_POST['formular'])) { // && (!$row==null) ) {
-
-	// FormularID retten:
-	$_SESSION['FormularID'] = $_POST['formular'];
+// Formular wurde vorher ausgewählt, aber nicht abgeschickt! -> Daten aus Datenbank laden
+if ( ( isset($_SESSION['FormularID'])) && (!isset($_POST['submit'])) ) { // && (!$row==null) ) {
 	
-$sql = "SELECT * FROM `formular` WHERE ID=".$_POST['formular']."";
+$sql = "SELECT * FROM `formular` WHERE ID=".$_SESSION['FormularID']."";
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen1: " . mysql_error());
 
@@ -199,9 +202,6 @@ if (!isset( $_POST['ActiveSurveillance'] )) $_POST['ActiveSurveillance'] = 0;
 
 // Wenn abgesendet wird, dann soll auch gespeichert werden
 if (isset( $_POST['submit'] )){
-	// Falls bereits eine FormularID übergeben wurde, dann soll sie berücksichtigt werden!
-	// if (isset( $_SESSION['FormularID'] )) $_POST['formular'] = $_SESSION['FormularID'];
-
 	// Falls keine FormularID übergeben wurde -> neuen Datensatz anlegen!
 	if (!isset( $_SESSION['FormularID'] )) {
 	$sql = "INSERT INTO `".DB."`.`formular` (`ID`, `Name`, `Vorname`, `Geburtsdatum`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSAVorwerte`, `PSAVorDatum`, `BiopsieErgebnis`, `BiopsieposFund`, `BiopsieposGesamt`, `PIN`, `PINFund`, `PINGesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `ReBiopsie`, `PSAKontrolle`, `radikaleProstatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `ActiveSurveillance`) VALUES (NULL, '".$_POST['Name']."', '".$_POST['Vorname']."', '".$_POST['Geburtsdatum']."', '".$_POST['Praetherapeutisch']."', '".$_POST['PSA']."', '".$_POST['DatumPSA']."', '".$_POST['FreiesPSA']."', '".$_POST['Prostatavolumen']."', '".$_POST['Uebergangszone']."', '".$_POST['DigitalePalpation']."', '".$_POST['DigPalKommentar']."', '".$_POST['TransrektalerUltraschall']."', '".$_POST['TransUltraKommentar']."', '".$_POST['IPSS']."', '".$_POST['Koerpergewicht']."', '".$_POST['Koerperlaenge']."', '".$_POST['BMI']."', '".$_POST['PSAVorwerte']."', '".$_POST['PSAVorDatum']."', '".$_POST['BiopsieErgebnis']."', '".$_POST['BiopsieposFund']."', '".$_POST['BiopsieposGesamt']."', '".$_POST['PIN']."', '".$_POST['PINFund']."', '".$_POST['PINGesamt']."', '".$_POST['Prostatitis']."', '".$_POST['Gleason1']."', '".$_POST['Gleason2']."', '".$_POST['Gleason3']."', '".$_POST['Helpap']."', '".$_POST['PIN3']."', '".$_POST['AAH']."', '".$_POST['Benigne']."', '".$_POST['BenigneKommentar']."', '".$_POST['In1']."', '".$_POST['In2']."', '".$_POST['Skelettszintigramm']."', '".$_POST['Besprechung']."', '".$_POST['ReBiopsie']."', '".$_POST['PSAKontrolle']."', '".$_POST['radikaleProstatektomie']."', '".$_POST['Bestrahlung']."', '".$_POST['extern']."', '".$_POST['HDR']."', '".$_POST['LDR']."', '".$_POST['ActiveSurveillance']."');";
