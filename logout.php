@@ -1,10 +1,10 @@
 <?php
-	function anzeigen(){
-
-	}
-
+// Session starten
 
 	session_start();
+
+// Grafische Oberfläscher reinladen
+
   	include 'head2.html';
     		echo '<li><a href=\'login.php?PHPSESSID='.session_id().'\'>Home</a></li>';
     		echo '<li><a href=\'logout.php?PHPSESSID='.session_id().'\'>Logout</a></li>';
@@ -17,29 +17,23 @@
 	  echo '<div id="content">';
 	   echo '<div id="label">';
    	   echo '<div id="box">';
-	   echo $_POST['formular'];
+
+// Ab hier fängt der Inhalt des Dokuments an
+// Die Erlaubnis wird auf Falsch gesetzt, die Session beendet und das Sessionobjekt zerstört
+
 	   $_SESSION['permission']=false;	  
 	   session_unset();
 	   session_destroy();
-             if ($_SESSION['permission']){
-		if($_SESSION['writing']){
-			anzeigen();
-		}
-		else{
-			echo '<fieldset>';
-			echo 'Sie haben kein Schreibrecht für das Formular';
-			echo '</fieldset>';
-		    }
-  	     }
-	     else
-	     {
 	           echo '<fieldset>';
-		   echo 'Sie sind nicht eingeloggt!<br>';
+		   echo 'Sie sind nicht eingeloggt!<br><br>';
 		   echo '<a href=\'index.html\'>Hier wieder einloggen</a>';
       	           echo '</fieldset>';
-	     }
+	  
 
 
     echo'</div>';
+
+// Den unteren Teil des Dokuments reinladen
+
   include 'bottom.html';
 ?>
