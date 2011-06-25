@@ -3,7 +3,7 @@
 
 	session_start();
 
-// Grafische Oberfläscher reinladen
+// Grafische Oberfläsche reinladen
 
   	include 'head2.html';
     		echo '<li><a href=\'login.php?PHPSESSID='.session_id().'\'>Home</a></li>';

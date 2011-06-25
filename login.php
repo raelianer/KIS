@@ -81,6 +81,7 @@
 
 
 // Wenn der Benutzer gefunden wurde wird die Seite geladen, andernfalls wird ausgegeben: Falscher Benutzername und/oder Passwort !
+// Leserecht, Schreibrecht, und Erlaubnis die Seite aufzurufen werden in die Sessionvariable gepseichert
 
 	if ($userfound){
  	        echo '<div id="foto"><img src="fotos/foto'.$row['userid'].'.jpg" alt="foto" width="110" height="140"></div>';
