@@ -60,7 +60,7 @@
 // Ab hier fängt der eigentliche Inhalt des Dokuments an
 
 	echo '<fieldset>';
-	echo '<legend>Status: </legend>';
+	echo '<legend>Status </legend>';
 	if (!isset($_SESSION['permission'])||$_SESSION['permission']==false){
 	$_SESSION['user']=$_POST['user'];
 	$_SESSION['password']=$_POST['password'];

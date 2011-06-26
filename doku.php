@@ -1,7 +1,23 @@
 <?php
+
+// Funkion anzeigen() zeigt die eigentliche Dokumentation an
+
+	function anzeigen(){
+	echo '<fieldset>
+	        <legend>Beschreibung </legend>
+		Installation:<br>
+		Rollen und Rechtesystem:<br>
+		Funktionalität:<br>
+		Plausibilität der Eingaben:<br>
+	      </fieldset>';		
+	}
+
+
 // Session starten
 
 	session_start();
+
+
 
 // Grafische Oberfläsche reinladen
 
@@ -20,6 +36,17 @@
 
 // Ab hier fängt der Inhalt des Dokuments an
 
+		if ($_SESSION['permission']){
+			anzeigen();
+
+		}
+		else
+		{
+			echo '<fieldset>';
+			echo 'Falscher Benutzername und/oder Passwort !<br><br>';
+ 	        	echo '<a href=\'index.html\'>Hier wieder einloggen</a>';
+			echo '</fieldset><br>';
+		}
 
 
     echo'</div>';
