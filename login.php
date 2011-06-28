@@ -17,7 +17,7 @@
 	FROM
     	patient';
 	$result = $db->query($sql2);
-             echo '<select name="formular" size="20" style="width: 550px">';
+             echo '<select name="patientid" size="20" style="width: 550px">';
 		while ($row = $result->fetch_assoc()){
 		     echo '<option value="'.$row['patientid'].'">'.'ID: '.$row['patientid'].' '.$row['firstname'].' '.$row['lastname'];
 
