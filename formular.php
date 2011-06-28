@@ -22,21 +22,20 @@ if ( (!isset( $_SESSION['permission'] ) ) || $_SESSION['permission']==false) hea
 $db = new mysqli(HOST, USER, PASS, DB);
 
 	// FormularID retten:
-	if ( (isset($_POST['formular']))) {
-		echo"FormularID retten: ".$_POST['formular'];
-	$_SESSION['FormularID'] = $_POST['formular'];
+	if ( (isset($_POST['patientid']))) {
+		echo"PatientenID retten: ".$_POST['patientid'];
+	$_SESSION['PatientID'] = $_POST['patientid'];
 	}
 
 // Datenbankabfrage durchführen	
-$sql = "SELECT * FROM `formular` WHERE ID=".$_SESSION['FormularID']."";
+$sql = "SELECT * FROM `patient` INNER JOIN `formular` ON `patient`.`patientid` = `formular`.`ID` WHERE `patientid` =".$_SESSION['PatientID']."";
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen1: " . mysql_error());
 
 $row = $result->fetch_object();
-echo$row;
 
 // Formular wurde nicht ausgewählt und auch nicht an sich selbst geschickt
-if ( ( (!isset($_SESSION['FormularID'])) || ($row==NULL) ) && (!isset($_POST['submit'])) ){
+if ( ( (!isset($_SESSION['PatientID'])) || ($row==NULL) ) && (!isset($_POST['submit'])) ){
 	echo"Neues Formular anlegen";
 	// Neues Formular anlegen
 	$_POST['Name'] = "";
@@ -99,10 +98,10 @@ if ( ( (!isset($_SESSION['FormularID'])) || ($row==NULL) ) && (!isset($_POST['su
 
 
 // Formular wurde vorher ausgewählt, aber nicht abgeschickt! -> Daten aus Datenbank laden
-if ( ( isset($_SESSION['FormularID'])) && (!isset($_POST['submit'])) && (!$row==NULL) ) {
-	$_POST['Name'] = $row->Name;
-	$_POST['Vorname'] = $row->Vorname;
-	$_POST['Geburtsdatum'] = $row->Geburtsdatum;
+if ( ( isset($_SESSION['PatientID'])) && (!isset($_POST['submit'])) && (!$row==NULL) ) {
+	$_POST['Name'] = $row->lastname;
+	$_POST['Vorname'] = $row->firstname;
+	$_POST['Geburtsdatum'] = $row->birth;
 	$_POST['Praetherapeutisch'] = $row->Praetherapeutisch;
 	$_POST['PSA'] = $row->PSA;
 	$_POST['DatumPSA'] = $row->DatumPSA;
@@ -204,11 +203,11 @@ if (!isset( $_POST['ActiveSurveillance'] )) $_POST['ActiveSurveillance'] = 0;
 // Wenn abgesendet wird, dann soll auch gespeichert werden
 if (isset( $_POST['submit'] )){
 	// Falls keine FormularID übergeben wurde oder kein Datenbankeintrag vorhanden -> neuen Datensatz anlegen!
-	if ( (!isset($_SESSION['FormularID'])) || ($row==NULL) ) {
-	$sql = "INSERT INTO `".DB."`.`formular` (`ID`, `Name`, `Vorname`, `Geburtsdatum`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSAVorwerte`, `PSAVorDatum`, `BiopsieErgebnis`, `BiopsieposFund`, `BiopsieposGesamt`, `PIN`, `PINFund`, `PINGesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `ReBiopsie`, `PSAKontrolle`, `radikaleProstatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `ActiveSurveillance`) VALUES (NULL, '".$_POST['Name']."', '".$_POST['Vorname']."', '".$_POST['Geburtsdatum']."', '".$_POST['Praetherapeutisch']."', '".$_POST['PSA']."', '".$_POST['DatumPSA']."', '".$_POST['FreiesPSA']."', '".$_POST['Prostatavolumen']."', '".$_POST['Uebergangszone']."', '".$_POST['DigitalePalpation']."', '".$_POST['DigPalKommentar']."', '".$_POST['TransrektalerUltraschall']."', '".$_POST['TransUltraKommentar']."', '".$_POST['IPSS']."', '".$_POST['Koerpergewicht']."', '".$_POST['Koerperlaenge']."', '".$_POST['BMI']."', '".$_POST['PSAVorwerte']."', '".$_POST['PSAVorDatum']."', '".$_POST['BiopsieErgebnis']."', '".$_POST['BiopsieposFund']."', '".$_POST['BiopsieposGesamt']."', '".$_POST['PIN']."', '".$_POST['PINFund']."', '".$_POST['PINGesamt']."', '".$_POST['Prostatitis']."', '".$_POST['Gleason1']."', '".$_POST['Gleason2']."', '".$_POST['Gleason3']."', '".$_POST['Helpap']."', '".$_POST['PIN3']."', '".$_POST['AAH']."', '".$_POST['Benigne']."', '".$_POST['BenigneKommentar']."', '".$_POST['In1']."', '".$_POST['In2']."', '".$_POST['Skelettszintigramm']."', '".$_POST['Besprechung']."', '".$_POST['ReBiopsie']."', '".$_POST['PSAKontrolle']."', '".$_POST['radikaleProstatektomie']."', '".$_POST['Bestrahlung']."', '".$_POST['extern']."', '".$_POST['HDR']."', '".$_POST['LDR']."', '".$_POST['ActiveSurveillance']."');";
+	if ( (!isset($_SESSION['PatientID'])) || ($row==NULL) ) {
+	$sql = "INSERT INTO `".DB."`.`formular` (`ID`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSAVorwerte`, `PSAVorDatum`, `BiopsieErgebnis`, `BiopsieposFund`, `BiopsieposGesamt`, `PIN`, `PINFund`, `PINGesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `ReBiopsie`, `PSAKontrolle`, `radikaleProstatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `ActiveSurveillance`) VALUES (NULL, '".$_POST['Name']."', '".$_POST['Vorname']."', '".$_POST['Geburtsdatum']."', '".$_POST['Praetherapeutisch']."', '".$_POST['PSA']."', '".$_POST['DatumPSA']."', '".$_POST['FreiesPSA']."', '".$_POST['Prostatavolumen']."', '".$_POST['Uebergangszone']."', '".$_POST['DigitalePalpation']."', '".$_POST['DigPalKommentar']."', '".$_POST['TransrektalerUltraschall']."', '".$_POST['TransUltraKommentar']."', '".$_POST['IPSS']."', '".$_POST['Koerpergewicht']."', '".$_POST['Koerperlaenge']."', '".$_POST['BMI']."', '".$_POST['PSAVorwerte']."', '".$_POST['PSAVorDatum']."', '".$_POST['BiopsieErgebnis']."', '".$_POST['BiopsieposFund']."', '".$_POST['BiopsieposGesamt']."', '".$_POST['PIN']."', '".$_POST['PINFund']."', '".$_POST['PINGesamt']."', '".$_POST['Prostatitis']."', '".$_POST['Gleason1']."', '".$_POST['Gleason2']."', '".$_POST['Gleason3']."', '".$_POST['Helpap']."', '".$_POST['PIN3']."', '".$_POST['AAH']."', '".$_POST['Benigne']."', '".$_POST['BenigneKommentar']."', '".$_POST['In1']."', '".$_POST['In2']."', '".$_POST['Skelettszintigramm']."', '".$_POST['Besprechung']."', '".$_POST['ReBiopsie']."', '".$_POST['PSAKontrolle']."', '".$_POST['radikaleProstatektomie']."', '".$_POST['Bestrahlung']."', '".$_POST['extern']."', '".$_POST['HDR']."', '".$_POST['LDR']."', '".$_POST['ActiveSurveillance']."');";
 	} else {
 	// Falls eine FormularID übergeben wurde -> Datensatz ändern!
-	$sql = "UPDATE `".DB."`.`formular` SET `Name` = '".$_POST['Name']."', `Vorname` = '".$_POST['Vorname']."', `Geburtsdatum` = '".$_POST['Geburtsdatum']."', `Praetherapeutisch` = '".$_POST['Praetherapeutisch']."', `PSA` = '".$_POST['PSA']."', `DatumPSA` = '".$_POST['DatumPSA']."', `FreiesPSA` = '".$_POST['FreiesPSA']."', `Prostatavolumen` = '".$_POST['Prostatavolumen']."', `Uebergangszone` = '".$_POST['Uebergangszone']."', `DigitalePalpation` = '".$_POST['DigitalePalpation']."', `DigPalKommentar` = '".$_POST['DigPalKommentar']."', `TransrektalerUltraschall` = '".$_POST['TransrektalerUltraschall']."', `TransUltraKommentar` = '".$_POST['TransUltraKommentar']."', `IPSS` = '".$_POST['IPSS']."', `Koerpergewicht` = '".$_POST['Koerpergewicht']."', `Koerperlaenge` = '".$_POST['Koerperlaenge']."', `BMI` = '".$_POST['BMI']."', `PSAVorwerte` = '".$_POST['PSAVorwerte']."', `PSAVorDatum` = '".$_POST['PSAVorDatum']."', `BiopsieErgebnis` = '".$_POST['BiopsieErgebnis']."', `BiopsieposFund` = '".$_POST['BiopsieposFund']."', `BiopsieposGesamt` = '".$_POST['BiopsieposGesamt']."', `PIN` = '".$_POST['PIN']."', `PINFund` = '".$_POST['PINFund']."', `PINGesamt` = '".$_POST['PINGesamt']."', `Prostatitis` = '".$_POST['Prostatitis']."', `Gleason1` = '".$_POST['Gleason1']."', `Gleason2` = '".$_POST['Gleason2']."', `Gleason3` = '".$_POST['Gleason3']."', `Helpap` = '".$_POST['Helpap']."', `PIN3` = '".$_POST['PIN3']."', `AAH` = '".$_POST['AAH']."', `Benigne` = '".$_POST['Benigne']."', `BenigneKommentar` = '".$_POST['BenigneKommentar']."', `In1` = '".$_POST['In1']."', `In2` = '".$_POST['In2']."', `Skelettszintigramm` = '".$_POST['Skelettszintigramm']."', `Besprechung` = '".$_POST['Besprechung']."', `ReBiopsie` = '".$_POST['ReBiopsie']."', `PSAKontrolle` = '".$_POST['PSAKontrolle']."', `radikaleProstatektomie` = '".$_POST['radikaleProstatektomie']."', `Bestrahlung` = '".$_POST['Bestrahlung']."', `extern` = '".$_POST['extern']."', `HDR` = '".$_POST['HDR']."', `LDR` = '".$_POST['LDR']."', `ActiveSurveillance` = '".$_POST['ActiveSurveillance']."' WHERE ID = '".$_SESSION['FormularID']."';";
+	$sql = "UPDATE `".DB."`.`formular` SET `Praetherapeutisch` = '".$_POST['Praetherapeutisch']."', `PSA` = '".$_POST['PSA']."', `DatumPSA` = '".$_POST['DatumPSA']."', `FreiesPSA` = '".$_POST['FreiesPSA']."', `Prostatavolumen` = '".$_POST['Prostatavolumen']."', `Uebergangszone` = '".$_POST['Uebergangszone']."', `DigitalePalpation` = '".$_POST['DigitalePalpation']."', `DigPalKommentar` = '".$_POST['DigPalKommentar']."', `TransrektalerUltraschall` = '".$_POST['TransrektalerUltraschall']."', `TransUltraKommentar` = '".$_POST['TransUltraKommentar']."', `IPSS` = '".$_POST['IPSS']."', `Koerpergewicht` = '".$_POST['Koerpergewicht']."', `Koerperlaenge` = '".$_POST['Koerperlaenge']."', `BMI` = '".$_POST['BMI']."', `PSAVorwerte` = '".$_POST['PSAVorwerte']."', `PSAVorDatum` = '".$_POST['PSAVorDatum']."', `BiopsieErgebnis` = '".$_POST['BiopsieErgebnis']."', `BiopsieposFund` = '".$_POST['BiopsieposFund']."', `BiopsieposGesamt` = '".$_POST['BiopsieposGesamt']."', `PIN` = '".$_POST['PIN']."', `PINFund` = '".$_POST['PINFund']."', `PINGesamt` = '".$_POST['PINGesamt']."', `Prostatitis` = '".$_POST['Prostatitis']."', `Gleason1` = '".$_POST['Gleason1']."', `Gleason2` = '".$_POST['Gleason2']."', `Gleason3` = '".$_POST['Gleason3']."', `Helpap` = '".$_POST['Helpap']."', `PIN3` = '".$_POST['PIN3']."', `AAH` = '".$_POST['AAH']."', `Benigne` = '".$_POST['Benigne']."', `BenigneKommentar` = '".$_POST['BenigneKommentar']."', `In1` = '".$_POST['In1']."', `In2` = '".$_POST['In2']."', `Skelettszintigramm` = '".$_POST['Skelettszintigramm']."', `Besprechung` = '".$_POST['Besprechung']."', `ReBiopsie` = '".$_POST['ReBiopsie']."', `PSAKontrolle` = '".$_POST['PSAKontrolle']."', `radikaleProstatektomie` = '".$_POST['radikaleProstatektomie']."', `Bestrahlung` = '".$_POST['Bestrahlung']."', `extern` = '".$_POST['extern']."', `HDR` = '".$_POST['HDR']."', `LDR` = '".$_POST['LDR']."', `ActiveSurveillance` = '".$_POST['ActiveSurveillance']."' WHERE ID = '".$_SESSION['PatientID']."';";
 	}
 	echo$sql;
 	$result = $db->query($sql)
@@ -247,7 +246,10 @@ echo'<form action="formular.php?'.SID.'" method="post">
     <br />
     <label>PSA:
       <input type="text" name="PSA" value="'.$_POST['PSA'].'" />
-      ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), </label>
+      ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), </label>';
+	  if ($_POST['PSA'] >= 3.2) echo "PSA zu hoch!";
+	  if ($_POST['PSA'] < 0) echo "PSA muss positiv sein!";
+	  echo'
     <label>Datum:
       <input type="date" name="DatumPSA" value="'.$_POST['DatumPSA'].'" />
     </label>
