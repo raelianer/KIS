@@ -18,6 +18,7 @@ error_reporting(E_ALL);
 
 // Prüfen, ob der Nutzer eingeloggt ist
 if ( (!isset( $_SESSION['permission'] ) ) || $_SESSION['permission']==false) header('Location: index.html');
+
 if (!$_SESSION['reading']){
 header('Location: leserecht.php?PHPSESSID="'.session_id());
 }
@@ -524,8 +525,13 @@ echo'<form action="formular.php?'.SID.'" method="post">
 </form>
 <form action="login.php?'.SID.'" method="post">
 <input type="submit" name="zurück" value="Zurück"></form>
-<form action="formular.php?'.SID.'" method="post">
-<input type="submit" name="delete" value="Löschen"></form>
+<form action="formular.php?'.SID.'" method="post">';
+
+if (!$row==NULL){
+	echo '<input type="submit" name="delete" value="Löschen"></form>';
+	}
+
+echo '
 </body>
 </html>';
 ?>
