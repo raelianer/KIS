@@ -61,18 +61,7 @@
 
 // Ab hier fängt der Inhalt des Dokuments an
 
-		if ($_SESSION['permission']){
 			anzeigen();
-
-		}
-		else
-		{
-			echo '<fieldset>';
-			echo 'Falscher Benutzername und/oder Passwort !<br><br>';
- 	        	echo '<a href=\'index.html\'>Hier wieder einloggen</a>';
-			echo '</fieldset><br>';
-		}
-
 
     echo'</div>';
 
