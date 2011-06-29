@@ -105,7 +105,7 @@ or die("Anfrage fehlgeschlagen12: " . mysql_error());
 
 
 
-$sql = "INSERT INTO `".DB."`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, 'Max', 'Mustermann', '1980-08-15', NULL);";
+$sql = "INSERT INTO `".DB."`.`patient` (`patientid`, `firstname`, `lastname`, `birth`, `formularid`) VALUES (NULL, 'Max', 'Mustermann', '1980-08-15', 1);";
 $result = $db->query($sql)
 or die("Anfrage fehlgeschlagen13: " . mysql_error());
 
