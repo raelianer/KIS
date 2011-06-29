@@ -18,6 +18,13 @@ error_reporting(E_ALL);
 
 // Prüfen, ob der Nutzer eingeloggt ist
 if ( (!isset( $_SESSION['permission'] ) ) || $_SESSION['permission']==false) header('Location: index.html');
+if (!$_SESSION['reading']){
+header('Location: leserecht.php?PHPSESSID="'.session_id());
+}
+if (isset( $_POST['submit'] ) and !$_SESSION['writing']){
+header('Location: schreibrecht.php?PHPSESSID="'.session_id());
+}
+
 
 $db = new mysqli(HOST, USER, PASS, DB);
 

@@ -1,5 +1,6 @@
 	body{
-	background-color: #DEEAF0;
+	background:#4d87c7 url("back.png") repeat-x top left fixed; padding:10px 0;
+	background-color: white;
 	text-align: center;
 	}
 
