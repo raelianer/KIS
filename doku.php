@@ -26,6 +26,14 @@
 		- IPSS liegt zwischen 0 und 35 <br>
 		- 1. und 2. Gleasonfeld muss Werte zwischen 1 und 5 haben <br><br>
 		</div>
+		<b>Tabellen der Datenbank:</b><br>
+		<div id="tab">
+			- Formular<br>
+			- Patient<br>
+			- Rollen<br>
+			- Users<br><br>
+		</div>
+		</div>
 	      </fieldset>';		
 	}
 
