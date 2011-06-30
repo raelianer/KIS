@@ -24,11 +24,9 @@
 	   $_SESSION['permission']=false;	  
 	   session_unset();
 	   session_destroy();
-	           echo '<fieldset>';
 		   echo 'Sie sind nicht eingeloggt!<br><br>';
 		   echo '<a href=\'index.html\'>Hier wieder einloggen</a>';
-      	           echo '</fieldset>';
-	  
+      	 	  
 
 
     echo'</div>';

@@ -59,8 +59,7 @@
 
 // Ab hier fängt der eigentliche Inhalt des Dokuments an
 
-	echo '<fieldset>';
-	echo '<legend>Status </legend>';
+
 	if (!isset($_SESSION['permission'])||$_SESSION['permission']==false){
 	$_SESSION['user']=$_POST['user'];
 	$_SESSION['password']=$_POST['password'];
@@ -84,7 +83,9 @@
 // Leserecht, Schreibrecht, und Erlaubnis die Seite aufzurufen werden in die Sessionvariable gepseichert
 
 	if ($userfound){
- 	        echo '<div id="foto"><img src="fotos/foto'.$row['userid'].'.jpg" alt="foto" width="110" height="140"></div>';
+		echo '<fieldset>';
+		echo '<legend>Status </legend>';
+ 	    echo '<div id="foto"><img src="fotos/foto'.$row['userid'].'.jpg" alt="foto" width="110" height="140"></div>';
 		$_SESSION['permission'] = true;
 		$_SESSION['reading'] = $row['read'];
 		$_SESSION['writing'] = $row['write'];
@@ -106,7 +107,6 @@
 		$_SESSION['permission'] = false;
 		echo 'Falscher Benutzername und/oder Passwort !<br><br>';
  	        echo '<a href=\'index.html\'>Hier wieder einloggen</a>';
-		echo '</fieldset><br>';
 	}
 
     echo'</div>';
