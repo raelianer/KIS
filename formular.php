@@ -253,11 +253,11 @@ echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
     <legend>Patientendaten</legend>
 	<label for="Name" class="left">Name:</label>
-      <input type="text" id="Name" name="Name" value="'.$_POST['Name'].'" /><br />
+      <input type="text" id="Name" name="Name" value="'.$_POST['Name'].'" readonly="readonly" /><br />
 	<label for="Vorname" class="left">Vorname:</label>
-      <input type="text" id="Vorname" name="Vorname" value="'.$_POST['Vorname'].'" /><br />
+      <input type="text" id="Vorname" name="Vorname" value="'.$_POST['Vorname'].'" readonly="readonly" /><br />
 	<label for="Geburtsdatum" class="left">Geburtsdatum:</label>
-      <input type="date" id="Geburtsdatum" name="Geburtsdatum" value="'.$_POST['Geburtsdatum'].'" /><br />
+      <input type="date" id="Geburtsdatum" name="Geburtsdatum" value="'.$_POST['Geburtsdatum'].'" readonly="readonly" /><br />
   </fieldset>
   <fieldset>
     <legend>Biopsie</legend>
@@ -267,14 +267,16 @@ echo'<form action="formular.php?'.SID.'" method="post">
 	  <label for="Praetherapeutisch">Prätherapeutisch</label>
     <br />
     <label for="PSA" class="left">PSA:</label>
-      <input type="text" id="PSA" name="PSA" value="'.$_POST['PSA'].'" />
+      <input type="text" id="PSA" name="PSA" value="'.$_POST['PSA'].'" ';
+	  if ($_POST['PSA'] >= 3.2) echo 'class="wrong" ';
+	  echo'/>
       ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), ';
-	  if ($_POST['PSA'] >= 3.2) echo "PSA zu hoch!";
-	  if ($_POST['PSA'] < 0) echo "PSA muss positiv sein!";
 	  echo'
 	<label for="DatumPSA">Datum:</label>
-      <input type="date" id="DatumPSA" name="DatumPSA" value="'.$_POST['DatumPSA'].'" /><br/>
-	<label for="FreiesPSA" class="left">Freies PSA:</label>
+      <input type="date" id="DatumPSA" name="DatumPSA" value="'.$_POST['DatumPSA'].'" /><br/>';
+	  if ($_POST['PSA'] >= 3.2) echo '<span class="right wrong">PSA zu hoch!</span><br />';
+	  if ($_POST['PSA'] < 0) echo '<span class="right wrong">PSA muss positiv sein!</span><br />';
+	echo'<label for="FreiesPSA" class="left">Freies PSA:</label>
       <input type="text" id="FreiesPSA" name="FreiesPSA" value="'.$_POST['FreiesPSA'].'" />
       ng/ml, Quotient frei/gesamt - PSA<br/>
 	<label for="Prostatavolumen" class="left">Prostatavolumen gesamte Prostata:</label>
@@ -320,62 +322,56 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <label for="TransrektalerUltraschall3">suspekt, </label>
     <label>Lokalisation:
       <textarea name="TransUltraKommentar">'.$_POST['TransUltraKommentar'].'</textarea>
-    </label>
-    <label>International Prostate Syndrom Score:
-      <input type="text" name="IPSS" value="'.$_POST['IPSS'].'" />
+    </label><br />
+    <label for="IPSS" class="left">International Prostate Syndrom Score:</label>
+      <input type="text" id="IPSS" name="IPSS" value="'.$_POST['IPSS'].'" />
       (0-35)</label>
     <br/>
-    <label>Körpergewicht:
-      <input type="text" name="Koerpergewicht" value="'.$_POST['Koerpergewicht'].'" />
-      kg, </label>
-    <label>Körperlänge:
-      <input type="text" name="Koerperlaenge" value="'.$_POST['Koerperlaenge'].'" />
-      cm</label>
+    <label for="Koerpergewicht" class="left">Körpergewicht:</label>
+      <input type="text" id="Koerpergewicht" name="Koerpergewicht" value="'.$_POST['Koerpergewicht'].'" />
+      kg<br />
+    <label for="Koerperlaenge" class="left">Körperlänge:</label>
+      <input type="text" id="Koerperlaenge" name="Koerperlaenge" value="'.$_POST['Koerperlaenge'].'" />
+      cm<br />
   </fieldset>
   <fieldset>
     <legend>Body-Mass-Index</legend>';
 	$_POST['BMI'] = round($_POST['Koerpergewicht'] / ($_POST['Koerperlaenge']/100 * $_POST['Koerperlaenge']/100));
 	echo '
-    <input type="text" name="display" value="'.$_POST['BMI'].'" disabled /> (wird automatisch berechnet)
+    <input type="text" name="display" value="'.$_POST['BMI'].'" disabled class="right" /> (wird automatisch berechnet)
 	<input type="hidden" name="BMI" value="'.$_POST['BMI'].'">
   </fieldset>
   <fieldset>
     <legend>PSA-Vorwerte, Datum</legend>
-    <label>PSA-Vorwerte:
-      <input type="text" name="PSAVorwerte" value="'.$_POST['PSAVorwerte'].'" />
-    </label>
-    <label>Datum:
-      <input type="text" name="PSAVorDatum" value="'.$_POST['PSAVorDatum'].'" />
-    </label>
+    <label for="PSAVorwerte" class="left">PSA-Vorwerte:</label>
+      <input type="text" id="PSAVorwerte" name="PSAVorwerte" value="'.$_POST['PSAVorwerte'].'" /><br />
+    <label for="PSAVorDatum" class="left">Datum:</label>
+      <input type="text" id="PSAVorDatum" name="PSAVorDatum" value="'.$_POST['PSAVorDatum'].'" />
   </fieldset>
   <fieldset>
     <legend>Biopsie-Ergebnis</legend>
     Wieviele Biopsien zeigen PCa?<br/>
-    <label>
-      <input type="checkbox" name="BiopsieErgebnis" value="1" ';
+      <input type="checkbox" id="BiopsieErgebnis" name="BiopsieErgebnis" value="1" ';
 	  if ($_POST['BiopsieErgebnis']) echo 'checked="checked"';
-	  echo' />
-      Positiv
+	  echo' class="right"/>
+      <label for="BiopsieErgebnis">Positiv</label>
       <input type="text" name="BiopsieposFund" value="'.$_POST['BiopsieposFund'].'" />
       /
       <input type="text" name="BiopsieposGesamt" value="'.$_POST['BiopsieposGesamt'].'" />
-    </label>
+    
     <br/>
-    <label>
-      <input type="checkbox" name="PIN" value="1" ';
+      <input type="checkbox" id="PIN" name="PIN" value="1" ';
 	  if ($_POST['PIN']) echo 'checked="checked"';
-	  echo' />
-      PIN
+	  echo' class="right" />
+      <label for="PIN">PIN</label>
       <input type="text" name="PINFund" value="'.$_POST['PINFund'].'" />
       /
       <input type="text" name="PINGesamt" value="'.$_POST['PINGesamt'].'" />
-    </label>
     <br/>
-    <label>
-      <input type="checkbox" name="Prostatitis" value="1" ';
+      <input type="checkbox" id="Prostatitis" name="Prostatitis" value="1" ';
 	  if ($_POST['Prostatitis']) echo 'checked="checked"';
-	  echo' />
-      Stärkergradige Prostatitis</label>
+	  echo' class="right" />
+      <label for="Prostatitis">Stärkergradige Prostatitis</label>
     <br/>
     <br/>
     <label>Gleason:
