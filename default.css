@@ -12,9 +12,13 @@
 	text-align: left;
 	font-size: 20px;
 	font-weight:bold;
-	background-color: #DEEAF0;
+	background-color: #66cdaa;
 	box-shadow: 0px 0px 20px grey;
 	text-align: left;
+	border-left-style:solid;
+	border-right-style:solid;
+	border-color: grey;
+	border-width:1px;
 	}
 	
 	#headline{
@@ -89,6 +93,10 @@
 	background-color: white;
 	box-shadow: 0px 0px 20px grey;
 	text-align: left;
+	border-width:1px;
+  	border-style:solid;
+	border-color: grey;
+	border-top-style:none;
 	}
 
 	#menu {margin: 40px auto;
