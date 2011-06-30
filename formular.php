@@ -26,7 +26,6 @@ if (isset( $_POST['submit'] ) and !$_SESSION['writing']){
 header('Location: schreibrecht.php?PHPSESSID="'.session_id());
 }
 
-
 $db = new mysqli(HOST, USER, PASS, DB);
 
 	// FormularID retten:
@@ -246,92 +245,79 @@ echo'<!DOCTYPE HTML>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>KIS Fiktiv</title>
+<link rel="stylesheet" href="test.css" type="text/css" />
 </head>
 <body>';
 
 echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
     <legend>Patientendaten</legend>
-    <label>Name:
-      <input type="text" name="Name" value="'.$_POST['Name'].'" />
-    </label>
-    <label>Vorname:
-      <input type="text" name="Vorname" value="'.$_POST['Vorname'].'" />
-    </label>
-    <label>Geburtsdatum:
-      <input type="date" name="Geburtsdatum" value="'.$_POST['Geburtsdatum'].'" />
-    </label>
+	<label for="Name" class="left">Name:</label>
+      <input type="text" id="Name" name="Name" value="'.$_POST['Name'].'" /><br />
+	<label for="Vorname" class="left">Vorname:</label>
+      <input type="text" id="Vorname" name="Vorname" value="'.$_POST['Vorname'].'" /><br />
+	<label for="Geburtsdatum" class="left">Geburtsdatum:</label>
+      <input type="date" id="Geburtsdatum" name="Geburtsdatum" value="'.$_POST['Geburtsdatum'].'" /><br />
   </fieldset>
   <fieldset>
     <legend>Biopsie</legend>
-    <label>
-      <input type="checkbox" name="Praetherapeutisch" value="1" ';
+      <input type="checkbox" id="Praetherapeutisch" name="Praetherapeutisch" value="1" ';
 	  if ($_POST['Praetherapeutisch']) echo 'checked="checked"';
-	  echo' />
-      Prätherapeutisch</label>
+	  echo' class="right"/>
+	  <label for="Praetherapeutisch">Prätherapeutisch</label>
     <br />
-    <label>PSA:
-      <input type="text" name="PSA" value="'.$_POST['PSA'].'" />
-      ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), </label>';
+    <label for="PSA" class="left">PSA:</label>
+      <input type="text" id="PSA" name="PSA" value="'.$_POST['PSA'].'" />
+      ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), ';
 	  if ($_POST['PSA'] >= 3.2) echo "PSA zu hoch!";
 	  if ($_POST['PSA'] < 0) echo "PSA muss positiv sein!";
 	  echo'
-    <label>Datum:
-      <input type="date" name="DatumPSA" value="'.$_POST['DatumPSA'].'" />
-    </label>
-    <br/>
-    <label>Freies PSA:
-      <input type="text" name="FreiesPSA" value="'.$_POST['FreiesPSA'].'" />
-      ng/ml, Quotient frei/gesamt - PSA</label>
-    <br/>
-    <label>Prostatavolumen gesamte Prostata:
-      <input type="text" name="Prostatavolumen" value="'.$_POST['Prostatavolumen'].'" />
-      ccm, </label>
-    <label>Übergangszone:
-      <input type="text" name="Uebergangszone" value="'.$_POST['Uebergangszone'].'" />
-      cmm</label>
+	<label for="DatumPSA">Datum:</label>
+      <input type="date" id="DatumPSA" name="DatumPSA" value="'.$_POST['DatumPSA'].'" /><br/>
+	<label for="FreiesPSA" class="left">Freies PSA:</label>
+      <input type="text" id="FreiesPSA" name="FreiesPSA" value="'.$_POST['FreiesPSA'].'" />
+      ng/ml, Quotient frei/gesamt - PSA<br/>
+	<label for="Prostatavolumen" class="left">Prostatavolumen gesamte Prostata:</label>
+      <input type="text" id="Prostatavolumen" name="Prostatavolumen" value="'.$_POST['Prostatavolumen'].'" />
+      ccm,<br />
+    <label for="Uebergangszone" class="left">Übergangszone:</label>
+      <input type="text" id="Uebergangszone" name="Uebergangszone" value="'.$_POST['Uebergangszone'].'" />
+      cmm
   </fieldset>
   <fieldset>
     <legend>Digitale Palpation</legend>
-    <label>
-      <input type="radio" name="DigitalePalpation" value="normal" ';
+      <input type="radio" id="DigitalePalpation1" name="DigitalePalpation" value="normal" ';
 	  if ($_POST['DigitalePalpation']=='normal') echo 'checked="checked" ';
-	  echo '/>
-      normal</label>
-    <label>
-      <input type="radio" name="DigitalePalpation" value="dubios" ';
+	  echo 'class="right"/>
+      <label for="DigitalePalpation1">normal</label><br />
+      <input type="radio" id="DigitalePalpation2" name="DigitalePalpation" value="dubios" ';
 	  if ($_POST['DigitalePalpation']=='dubios') echo 'checked="checked" ';
-	  echo '/>
-      dubios</label>
-    <label>
-      <input type="radio" name="DigitalePalpation" value="suspekt" ';
+	  echo 'class="right"/>
+      <label for="DigitalePalpation2">dubios</label><br />
+      <input type="radio" id="DigitalePalpation3" name="DigitalePalpation" value="suspekt" ';
 	  if ($_POST['DigitalePalpation']=='suspekt') echo 'checked="checked" ';
-	  echo '/>
-      suspekt</label>
-    <label>
-      <input type="radio" name="DigitalePalpation" value="VA" ';
+	  echo 'class="right"/>
+      <label for="DigitalePalpation3">suspekt</label><br />
+      <input type="radio" id="DigitalePalpation4" name="DigitalePalpation" value="VA" ';
 	  if ($_POST['DigitalePalpation']=='VA') echo 'checked="checked" ';
-	  echo '/>
-      V.a. Organüberschreitung, Lokalisation:</label>
+	  echo 'class="right"/>
+      <label for="DigitalePalpation4">V.a. Organüberschreitung, Lokalisation:</label>
     <textarea name="DigPalKommentar">'.$_POST['DigPalKommentar'].'</textarea>
   </fieldset>
   <fieldset>
     <legend>Transrektaler Ultraschall</legend>
-    <label>
-      <input type="radio" name="TransrektalerUltraschall" value="normal" ';
+      <input type="radio" id="TransrektalerUltraschall1" name="TransrektalerUltraschall" value="normal" ';
 	  if ($_POST['TransrektalerUltraschall']=='normal') echo 'checked="checked" ';
-	  echo '/>
-      normal</label>
-    <label>
-      <input type="radio" name="TransrektalerUltraschall" value="dubios" ';
+	  echo 'class="right" />
+      <label for="TransrektalerUltraschall1">normal</label><br />
+      <input type="radio" id="TransrektalerUltraschall2" name="TransrektalerUltraschall" value="dubios" ';
 	  if ($_POST['TransrektalerUltraschall']=='dubios') echo 'checked="checked" ';
-	  echo '/>
-      dubios</label>
-    <label>
-      <input type="radio" name="TransrektalerUltraschall" value="suspekt" ';
+	  echo 'class="right" />
+      <label for="TransrektalerUltraschall2">dubios</label><br />
+      <input type="radio" id="TransrektalerUltraschall3" name="TransrektalerUltraschall" value="suspekt" ';
 	  if ($_POST['TransrektalerUltraschall']=='suspekt') echo 'checked="checked" ';
-	  echo '/>
-      suspekt, </label>
+	  echo 'class="right" />
+      <label for="TransrektalerUltraschall3">suspekt, </label>
     <label>Lokalisation:
       <textarea name="TransUltraKommentar">'.$_POST['TransUltraKommentar'].'</textarea>
     </label>
@@ -457,81 +443,67 @@ echo'<form action="formular.php?'.SID.'" method="post">
   </fieldset>
   <fieldset>
     <legend>Empfehlung</legend>
-    <label>
-      <input type="checkbox" name="Skelettszintigramm" value="1" ';
+      <input type="checkbox" id="Skelettszintigramm" name="Skelettszintigramm" value="1" ';
 	  if ($_POST['Skelettszintigramm']) echo 'checked="checked"';
-	  echo' />
-      Skelettszintigramm</label>
+	  echo'class="right" />
+      <label for="Skelettszintigramm">Skelettszintigramm</label>
     <br/>
-    <label>
-      <input type="checkbox" name="Besprechung" value="1" ';
+      <input type="checkbox" id="Besprechung" name="Besprechung" value="1" ';
 	  if ($_POST['Besprechung']) echo 'checked="checked"';
-	  echo' />
-      Besprechung der Therapieoptionen, z.B. radikale prostatektonomie, Radiatio, Androgenentzug</label>
+	  echo'class="right" />
+      <label for="Besprechung">Besprechung der Therapieoptionen, z.B. radikale prostatektonomie, Radiatio, Androgenentzug</label>
     <br/>
-    <label>
-      <input type="checkbox" name="ReBiopsie" value="1" ';
+      <input type="checkbox" id="ReBiopsie" name="ReBiopsie" value="1" ';
 	  if ($_POST['ReBiopsie']) echo 'checked="checked"';
-	  echo' />
-      Re-Biopsie in 3-6 Monaten</label>
+	  echo'class="right" />
+      <label for="ReBiopsie">Re-Biopsie in 3-6 Monaten</label>
     <br/>
-    <label>
-      <input type="checkbox" name="PSAKontrolle" value="1" ';
+      <input type="checkbox" id="PSAKontrolle" name="PSAKontrolle" value="1" ';
 	  if ($_POST['PSAKontrolle']) echo 'checked="checked"';
-	  echo' />
-      PSA-Kontrolle, ggfs. Re-Biopsie</label>
+	  echo'class="right" />
+      <label for="PSAKontrolle">PSA-Kontrolle, ggfs. Re-Biopsie</label>
     <br/>
-    <label>
-      <input type="checkbox" name="radikaleProstatektomie" value="1" ';
+      <input type="checkbox" id="radikaleProstatektomie" name="radikaleProstatektomie" value="1" ';
 	  if ($_POST['radikaleProstatektomie']) echo 'checked="checked"';
-	  echo' />
-      radikale Prostatekonomie</label>
+	  echo'class="right" />
+      <label for="radikaleProstatektomie">radikale Prostatekonomie</label>
     <br/>
     <br/>
-    <label>
-      <input type="checkbox" name="Bestrahlung" value="1" ';
+      <input type="checkbox" id="Bestrahlung" name="Bestrahlung" value="1" ';
 	  if ($_POST['Bestrahlung']) echo 'checked="checked"';
-	  echo' />
-      Bestrahlung</label>
+	  echo'class="right" />
+      <label for="Bestrahlung">Bestrahlung</label>
     <br/>
-    <label>
-      <input type="checkbox" name="extern" value="1" ';
+      <input type="checkbox" id="extern" name="extern" value="1" ';
 	  if ($_POST['extern']) echo 'checked="checked"';
-	  echo' />
-      extern</label>
+	  echo'class="right" />
+      <label for="extern">extern</label>
     <br/>
-    <label>
-      <input type="checkbox" name="HDR" value="1" ';
+      <input type="checkbox" id="HDR" name="HDR" value="1" ';
 	  if ($_POST['HDR']) echo 'checked="checked"';
-	  echo' />
-      HDR-Brachytherapie möglich</label>
+	  echo'class="right" />
+      <label for="HDR">HDR-Brachytherapie möglich</label>
     <br/>
-    <label>
-      <input type="checkbox" name="LDR" id="empf1" value="1" ';
+      <input type="checkbox" id="LDR" name="LDR" id="empf1" value="1" ';
 	  if ($_POST['LDR']) echo 'checked="checked"';
-	  echo' />
-      LDR-Brachytherapie möglich</label>
+	  echo'class="right" />
+      <label for="LDR">LDR-Brachytherapie möglich</label>
     <br/>
     <br/>
-    <label>
-      <input type="checkbox" name="ActiveSurveillance" value="1" ';
+      <input type="checkbox" id="ActiveSurveillance" name="ActiveSurveillance" value="1" ';
 	  if ($_POST['ActiveSurveillance']) echo 'checked="checked"';
-	  echo' />
-      "Active Surveillance"</label>
+	  echo'class="right" />
+      <label for="ActiveSurveillance">"Active Surveillance"</label>
   </fieldset>
   <br/>
-  <input type="button" value="Zurück" name="goback">
   <input type="submit" name="submit" value="Formular speichern" />
 </form>
 <form action="login.php?'.SID.'" method="post">
-<input type="submit" name="zurück" value="Zurück"></form>
-<form action="formular.php?'.SID.'" method="post">';
-
+<input type="submit" name="zurück" value="Zurück"></form>';
 if (!$row==NULL){
-	echo '<input type="submit" name="delete" value="Löschen"></form>';
-	}
-
-echo '
-</body>
+echo'<form action="formular.php?'.SID.'" method="post">
+<input type="submit" name="delete" value="Löschen"></form>';
+}
+echo '</body>
 </html>';
 ?>
