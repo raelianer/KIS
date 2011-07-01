@@ -316,11 +316,11 @@ echo'<form action="formular.php?'.SID.'" method="post">
 	  if ($_POST['DigitalePalpation']=='suspekt') echo 'checked="checked" ';
 	  echo 'class="right"/>
       <label for="DigitalePalpation3">suspekt</label><br />
-      <input type="radio" id="DigitalePalpation4" name="DigitalePalpation" value="VA" ';
+      <input type="radio" id="DigitalePalpation4" name="DigitalePalpation" value="VA" onclick="document.getElementById(\'tx1\').disabled=\'\'"' ;
 	  if ($_POST['DigitalePalpation']=='VA') echo 'checked="checked" ';
 	  echo 'class="right" style="vertical-align:top;"/>
       <label for="DigitalePalpation4" style="vertical-align:top;">V.a. Organüberschreitung, Lokalisation:</label>
-    <textarea name="DigPalKommentar">'.$_POST['DigPalKommentar'].'</textarea>
+    <textarea name="DigPalKommentar" id="tx1">'.$_POST['DigPalKommentar'].'</textarea>
   </fieldset>
   <fieldset>
     <legend>Transrektaler Ultraschall</legend>
@@ -332,17 +332,21 @@ echo'<form action="formular.php?'.SID.'" method="post">
 	  if ($_POST['TransrektalerUltraschall']=='dubios') echo 'checked="checked" ';
 	  echo 'class="right" />
       <label for="TransrektalerUltraschall2">dubios</label><br />
-      <input type="radio" id="TransrektalerUltraschall3" name="TransrektalerUltraschall" value="suspekt" ';
+      <input type="radio" id="TransrektalerUltraschall3" name="TransrektalerUltraschall" value="suspekt" onclick="document.getElementById(\'tx2\').disabled=\'\'"';
 	  if ($_POST['TransrektalerUltraschall']=='suspekt') echo 'checked="checked" ';
 	  echo 'class="right"  style="vertical-align:top;"/>
       <label for="TransrektalerUltraschall3"  style="vertical-align:top;">suspekt, Lokalisation:</label>
     <label>
-      <textarea name="TransUltraKommentar">'.$_POST['TransUltraKommentar'].'</textarea>
+      <textarea name="TransUltraKommentar" id="tx2">'.$_POST['TransUltraKommentar'].'</textarea>
     </label><br />
     <label for="IPSS" class="left">IPSS:</label>
-      <input type="text" id="IPSS" name="IPSS" value="'.$_POST['IPSS'].'" />
-      (0-35)</label>
-    <br/>
+      <input type="text" id="IPSS" name="IPSS" value="'.$_POST['IPSS'].'"';
+	if ($_POST['IPSS'] > 35 or $_POST['IPSS'] < 0) echo 'class="wrong" ';
+	echo'	  />';
+    echo'  (0-35)</label>
+    <br/>';
+	if ($_POST['IPSS'] > 35 or $_POST['IPSS'] < 0) echo '<span class="right wrong">IPSS muss >=0 und <=35 sein !</span><br />';
+	echo'
     <label for="Koerpergewicht" class="left">Körpergewicht:</label>';
 if ($_POST['Koerpergewicht']==1) $_POST['Koerpergewicht']=null;
 	echo '<input type="text" id="Koerpergewicht" name="Koerpergewicht" value="'.$_POST['Koerpergewicht'].'" />';
@@ -397,15 +401,25 @@ echo'	kg<br />
     <br/>
     <br/>
     <label for="Gleason" class="left">Gleason:</label>
-      <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" size="5" />
+      <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" size="5"';
+if (isset( $_POST['submit'] ))
+if ($_POST['Gleason1']<1 or $_POST['Gleason1'] > 5) echo 'class="wrong" ';
+
+echo'	  />
       +
-      <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" size="5" />
+      <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" size="5"';
+if (isset( $_POST['submit'] ))
+	  if ($_POST['Gleason2']<1 or $_POST['Gleason2'] > 5) echo 'class="wrong" ';
+echo'	  />
       =';
 	  $_POST['Gleason3'] = $_POST['Gleason1'] + $_POST['Gleason2'];
 	  echo '
       <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled size="5" />
 	  <input type="hidden" name="Gleason3" value="'.$_POST['Gleason3'].'">
-    <br/>
+    <br/>';
+if (isset( $_POST['submit'] ))
+	if ($_POST['Gleason1']>5 or $_POST['Gleason1']<1 or $_POST['Gleason2']>5 or $_POST['Gleason2']<1) echo '<span class="right wrong">Werte müssen >1 und <=5 sein</span><br />';
+	echo'
     <label for="Helpap" class="left">Helpap-Grad:</label>
       <select id="Helpap" name="Helpap" style="width: 60px; background: #ddd;">
         <option> </option>
