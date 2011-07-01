@@ -1,0 +1,23 @@
+label, select, input[type=checkbox], input[type=radio], input[type=button], input[type=submit] {
+	cursor: pointer;
+}
+input, textarea {
+	background: #ddd;
+}
+input:focus, textarea:focus {
+	color: #000;
+	background: #fff;
+	outline: 1px solid red;
+}
+.left {
+	float: left;
+	text-align: right;
+	width: 40%;
+	margin-right: 2%;
+}
+.right, button {
+	margin-left : 42%;
+}
+.wrong {
+	background-color:red;
+}
