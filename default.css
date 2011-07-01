@@ -1,10 +1,10 @@
-	body{
-	background:#4d87c7 url("back.png") repeat-x top left fixed; padding:10px 0;
+body {
+	background:#4d87c7 url("back.png") repeat-x top left fixed;
+	padding:10px 0;
 	background-color: white;
 	text-align: center;
-	}
-
-	#head{
+}
+#head {
 	margin: 0px auto;
 	margin-top: 40px;
 	width: 1000px;
@@ -19,73 +19,59 @@
 	border-right-style:solid;
 	border-color: grey;
 	border-width:1px;
-	}
-	
-	#headline{
-		text-align: center;
-		font-weight:bold;
-		margin-bottom: 20px;	
-	}
-
-	#foto{
-		width: 110px;
-		height: 140px;
-		float:left;
-		margin-right: 15px;
-	}
-
-	select{
+}
+#headline {
+	text-align: center;
+	font-weight:bold;
+	margin-bottom: 20px;
+}
+#foto {
+	width: 110px;
+	height: 140px;
+	float:left;
+	margin-right: 15px;
+}
+select {
 	width: 500px;
-	}
-
-	#label{
+}
+#label {
 	margin: 0px auto;
 	padding-top: 20px;
 	width: 990px;
-
-	}
-
-	fieldset{
+}
+fieldset {
 	padding: 10px;
 	width:900px;
 	margin: 0px auto;
 	margin-top: 0px;
-	}
-
-	#box{
+}
+#box {
 	margin: 0px auto;
 	padding: 30px;
 	height: 600px;
-	}
-
-	#box2{
+}
+#box2 {
 	margin: 0px auto;
 	padding-top: 30px;
-
-	}
-
-	#box3{
+}
+#box3 {
 	padding-top: 25px;
 	float:right;
 	width: 250px;
 	height: 60px;
-	}
-
-	#box1{
+}
+#box1 {
 	width: 250px;
 	height: 60px;
 	float:left;
-
-	}
-
-	#fiktiv{
+}
+#fiktiv {
 	font-size: 16px;
 	margin-left: 10px;
 	float:left;
 	font-weight:bold;
-	}
-
-	#content{
+}
+#content {
 	margin: 0px auto;
 	margin-bottom: 80px;
 	padding-bottom: 80px;
@@ -94,50 +80,70 @@
 	box-shadow: 0px 0px 20px grey;
 	text-align: left;
 	border-width:1px;
-  	border-style:solid;
+	border-style:solid;
 	border-color: grey;
 	border-top-style:none;
-	}
-
-	#menu {margin: 40px auto;
-		font-variant: small-caps;
-		font-weight: bold;
-		text-align: center;
-		font-size: 16px;
-	}
-
-	#clear {
-		clear: left;
-	}
-
-
-	#menu li a {
-		color:black;
-		padding: 0px 1em;
-		margin-right: 30px;
-		text-decoration: none; 
-		background-color:#00ffff;
-		box-shadow: 10px 4px 15px grey;
-	}
-	
-	#menu li a:hover {
-		background-color:#b0c4de;
-		color:#900;
-		box-shadow: 10px 4px 15px grey;
-	}
-	
-	#menu li {
-  		display: inline; 
-	}
-
-	#tab{
+}
+#menu {
+	margin: 40px auto;
+	font-variant: small-caps;
+	font-weight: bold;
+	text-align: center;
+	font-size: 16px;
+}
+#clear {
+	clear: left;
+}
+#menu li a {
+	color:black;
+	padding: 0px 1em;
+	margin-right: 30px;
+	text-decoration: none;
+	background-color:#00ffff;
+	box-shadow: 10px 4px 15px grey;
+}
+#menu li a:hover {
+	background-color:#b0c4de;
+	color:#900;
+	box-shadow: 10px 4px 15px grey;
+}
+#menu li {
+	display: inline;
+}
+#tab {
 	padding-left: 50px;
-	}
-
-	#savebutton{
+}
+#savebutton {
 	padding: 10px;
 	width:900px;
 	margin: 0px auto;
 	margin-top: 0px;
 	text-align:left;
-	}
+}
+
+
+
+
+label, select, input[type=checkbox], input[type=radio], input[type=button], input[type=submit] {
+	cursor: pointer;
+}
+input, textarea {
+	background: #ddd;
+}
+input:focus, textarea:focus {
+	color: #000;
+	background: #fff;
+	outline: 1px solid red;
+}
+.left {
+	float: left;
+	text-align: right;
+	width: 40%;
+	margin-right: 2%;
+}
+.right, button {
+	margin-left : 42%;
+}
+.wrong {
+	background-color:red;
+}

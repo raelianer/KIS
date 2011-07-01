@@ -245,7 +245,7 @@ echo'<!DOCTYPE HTML>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>KIS Fiktiv</title>
-<link rel="stylesheet" href="test.css" type="text/css" />
+<link rel="stylesheet" href="default.css" type="text/css" />
 </head>
 <body>';
 
@@ -374,19 +374,18 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <label for="Prostatitis">Stärkergradige Prostatitis</label>
     <br/>
     <br/>
-    <label>Gleason:
-      <input type="text" name="Gleason1" value="'.$_POST['Gleason1'].'" />
+    <label for="Gleason" class="left">Gleason:</label>
+      <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" />
       +
-      <input type="text" name="Gleason2" value="'.$_POST['Gleason2'].'" />
+      <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" />
       =';
 	  $_POST['Gleason3'] = $_POST['Gleason1'] + $_POST['Gleason2'];
 	  echo '
       <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled />
 	  <input type="hidden" name="Gleason3" value="'.$_POST['Gleason3'].'">
-    </label>
     <br/>
-    <label>Helpap-Grad:
-      <select name="Helpap">
+    <label for="Helpap" class="left">Helpap-Grad:</label>
+      <select id="Helpap" name="Helpap">
         <option> </option>
         <option'; if ($_POST['Helpap']=="G1a") echo" selected";
 		echo'> G1a</option>
@@ -401,10 +400,9 @@ echo'<form action="formular.php?'.SID.'" method="post">
         <option'; if ($_POST['Helpap']=="G111b") echo" selected";
 		echo'> G111b</option>
       </select>
-    </label>
     <br>
-    <label>PIN 3&deg;:
-      <select name="PIN3">
+    <label for="PIN3" class="left">PIN 3&deg;:</label>
+      <select id="PIN3" name="PIN3">
         <option> </option>
         <option'; if ($_POST['PIN3']=="PIN 1") echo" selected";
 		echo'> PIN 1</option>
@@ -413,29 +411,25 @@ echo'<form action="formular.php?'.SID.'" method="post">
         <option'; if ($_POST['PIN3']=="PIN 3") echo" selected";
 		echo'>PIN 3</option>
       </select>
-    </label>
     <br>
-    <label>
-      <input type="checkbox" name="AAH" value="1" ';
+      <input type="checkbox" id="AAH" name="AAH" value="1" ';
 	  if ($_POST['AAH']) echo 'checked="checked"';
-	  echo' />
-      AAH</label>
+	  echo' class="right" />
+      <label for="AAH">AAH</label>
     <br/>
-    <label>
-      <input type="checkbox" name="Benigne" value="1" ';
+      <input type="checkbox" id="Benigne" name="Benigne" value="1" ';
 	  if ($_POST['Benigne']) echo 'checked="checked"';
-	  echo' />
-      Benigne</label>
+	  echo' class="right" />
+      <label for="Benigne">Benigne</label>
     <br/>
-    <label>Kommentar:
-      <textarea name="BenigneKommentar">'.$_POST['BenigneKommentar'].'</textarea>
-    </label>
+    <label for="BenigneKommentar" class="left">Kommentar:</label>
+      <textarea id="BenigneKommentar" name="BenigneKommentar">'.$_POST['BenigneKommentar'].'</textarea>
     <br/>
-    <label>In
-      <input type="text" name="In1" value="'.$_POST['In1'].'" />
+    <label for="In" class="right">In</label>
+      <input type="text" id="In" name="In1" value="'.$_POST['In1'].'" />
       /
-      <input type="text" name="In2" value="'.$_POST['In2'].'" />
-      Stanzen, Details siehe "Befundbericht-Prostatabiopsie"</label>
+      <input type="text" id="In" name="In2" value="'.$_POST['In2'].'" />
+      Stanzen, Details siehe "Befundbericht-Prostatabiopsie"
   </fieldset>
   <fieldset>
     <legend>Empfehlung</legend>
