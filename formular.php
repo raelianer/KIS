@@ -248,7 +248,6 @@ echo'<!DOCTYPE HTML>
 <link rel="stylesheet" href="default.css" type="text/css" />
 </head>
 <body>';
-// Dem Matthias sein head2:
 echo'	<div id="head"><div id="fiktiv">KIS Fiktiv</div>
 	 <div id="menu">
     	  <ul>';
@@ -262,7 +261,7 @@ echo'	<div id="head"><div id="fiktiv">KIS Fiktiv</div>
 	echo '</div>';
 	echo '<div id="content">';
 	echo '<div id="label">';
-	echo '<div id="box">';		  
+	echo '<div id="box2">';		  
 		  
 		  
 		  
