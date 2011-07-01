@@ -240,6 +240,11 @@ if ($_SESSION['writing'] and isset( $_POST['submit'] )){
 	}
 	$result = $db->query($sql)
 or die("Speichern fehlgeschlagen: " . mysql_error());
+	/*echo '
+	<script language="javascript" type="text/javascript">
+	alert(\'Das Formular wurde gespeichert\' );
+	</script>
+	';'*/
 }
 
 
@@ -408,13 +413,13 @@ echo'	kg<br />
     <br/>
     <label for="Gleason" class="left">Gleason:</label>
       <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" size="5"';
-if (isset( $_POST['submit'] ))
+if (isset( $_POST['submit'] ) or (!$row==NULL))
 if ($_POST['Gleason1']<1 or $_POST['Gleason1'] > 5) echo 'class="wrong" ';
 
 echo'	  />
       +
       <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" size="5"';
-if (isset( $_POST['submit'] ))
+if (isset( $_POST['submit'] ) or (!$row==NULL))
 	  if ($_POST['Gleason2']<1 or $_POST['Gleason2'] > 5) echo 'class="wrong" ';
 echo'	  />
       =';
@@ -423,7 +428,7 @@ echo'	  />
       <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled size="5" />
 	  <input type="hidden" name="Gleason3" value="'.$_POST['Gleason3'].'">
     <br/>';
-if (isset( $_POST['submit'] ))
+if (isset( $_POST['submit'] )or(!$row==NULL))
 	if ($_POST['Gleason1']>5 or $_POST['Gleason1']<1 or $_POST['Gleason2']>5 or $_POST['Gleason2']<1) echo '<span class="right wrong">Werte müssen >1 und <=5 sein</span><br />';
 	echo'
     <label for="Helpap" class="left">Helpap-Grad:</label>
