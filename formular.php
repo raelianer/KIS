@@ -30,7 +30,6 @@ $db = new mysqli(HOST, USER, PASS, DB);
 
 	// FormularID retten:
 	if ( (isset($_POST['patientid']))) {
-		echo"PatientenID retten: ".$_POST['patientid'];
 	$_SESSION['PatientID'] = $_POST['patientid'];
 	}
 	
@@ -59,7 +58,6 @@ $row = $result->fetch_object();
 
 // Bisher kein Formular gespeichert und auch nicht an sich selbst geschickt
 if ( ($row==NULL) && (!isset($_POST['submit'])) ){
-	echo"Neues Formular anlegen";
 	// Neues Formular anlegen
 	$_POST['Name'] = $stammdaten->lastname;
 	$_POST['Vorname'] = $stammdaten->firstname;
