@@ -483,18 +483,18 @@ echo'<form action="formular.php?'.SID.'" method="post">
     <br/>
       <input type="checkbox" id="extern" name="extern" value="1" ';
 	  if ($_POST['extern']) echo 'checked="checked"';
-	  echo'class="right" />
+	  echo'class="rightPlus" />
       <label for="extern">extern</label>
     <br/>
       <input type="checkbox" id="HDR" name="HDR" value="1" ';
 	  if ($_POST['HDR']) echo 'checked="checked"';
-	  echo'class="right" />
+	  echo'class="rightPlus" />
       <label for="HDR">HDR-Brachytherapie möglich</label>
     <br/>
       <input type="checkbox" id="LDR" name="LDR" id="empf1" value="1" ';
 	  if ($_POST['LDR']) echo 'checked="checked"';
-	  echo'class="right" />
-      <label for="LDR">LDR-Brachytherapie möglich</label>
+	  echo'class="rightPlus" />
+      <label for="LDR">LDR-Brachytherapie möglich</label></span>
     <br/>
     <br/>
       <input type="checkbox" id="ActiveSurveillance" name="ActiveSurveillance" value="1" ';

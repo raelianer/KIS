@@ -138,12 +138,15 @@ input:focus, textarea:focus {
 .left {
 	float: left;
 	text-align: right;
-	width: 40%;
+	width: 27%;
 	margin-right: 2%;
 }
 .right, button {
-	margin-left : 42%;
+	margin-left : 29%;
 }
 .wrong {
 	background-color:red;
+}
+.rightPlus{
+	margin-left:35%;
 }
