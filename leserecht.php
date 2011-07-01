@@ -3,10 +3,10 @@
 // Funkion anzeigen() zeigt die eigentliche Dokumentation an
 
 	function anzeigen(){
-	echo '<fieldset>
+	echo '
 	        <legend>Hinweis </legend>
 		Sie haben kein Leserecht bzw. Schreibrecht!
-	      </fieldset>';		
+	      ';		
 	}
 
 

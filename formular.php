@@ -25,6 +25,11 @@ header('Location: leserecht.php?PHPSESSID="'.session_id());
 if (isset( $_POST['submit'] ) and !$_SESSION['writing']){
 header('Location: schreibrecht.php?PHPSESSID="'.session_id());
 }
+if (isset( $_POST['delete'] ) and !$_SESSION['writing']){
+header('Location: schreibrecht.php?PHPSESSID="'.session_id());
+}
+
+
 
 $db = new mysqli(HOST, USER, PASS, DB);
 
@@ -34,7 +39,7 @@ $db = new mysqli(HOST, USER, PASS, DB);
 	}
 	
 	// Formular löschen
-if ( (isset($_POST['delete'])) ) {
+if ( (isset($_POST['delete'])) and $_SESSION['writing'] ) {
 	$sql = "DELETE FROM `formular` WHERE `ID` =".$_SESSION['PatientID'];
 	$result = $db->query($sql)
 or die("Anfrage fehlgeschlagen1: " . mysql_error());
@@ -335,7 +340,7 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="radio" id="TransrektalerUltraschall3" name="TransrektalerUltraschall" value="suspekt" onclick="document.getElementById(\'tx2\').disabled=\'\'"';
 	  if ($_POST['TransrektalerUltraschall']=='suspekt') echo 'checked="checked" ';
 	  echo 'class="right"  style="vertical-align:top;"/>
-      <label for="TransrektalerUltraschall3">suspekt,</label><br><label class="left" style="vertical-align:top;"> Lokalisation:</label>
+      <label for="TransrektalerUltraschall3">suspekt</label><br><label class="left" style="vertical-align:top;"> Lokalisation:</label>
    
 	<label>
       <textarea name="TransUltraKommentar" id="tx2">'.$_POST['TransUltraKommentar'].'</textarea>
