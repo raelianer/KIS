@@ -35,10 +35,11 @@ $db = new mysqli(HOST, USER, PASS, DB);
 	
 	// Formular löschen
 if ( (isset($_POST['delete'])) ) {
-	$sql = "DELETE FROM `kis`.`formular` WHERE `formular`.`ID` = 3";
+	$sql = "DELETE FROM `formular` WHERE `ID` =".$_SESSION['PatientID'];
 	$result = $db->query($sql)
 or die("Anfrage fehlgeschlagen1: " . mysql_error());
-echo "Formular gelöscht!";
+	$sql2 = "UPDATE patient SET formularid = null WHERE patientid = '".$_SESSION['PatientID']."';";
+	$result2 = $db->query($sql2);
 }
 
 // Datenbankabfrage durchführen
@@ -232,7 +233,6 @@ if ($_SESSION['writing'] and isset( $_POST['submit'] )){
 	// Falls Formular bereits vorhanden -> Datensatz ändern!
 	$sql = "UPDATE `".DB."`.`formular` SET `Praetherapeutisch` = '".$_POST['Praetherapeutisch']."', `PSA` = '".$_POST['PSA']."', `DatumPSA` = '".$_POST['DatumPSA']."', `FreiesPSA` = '".$_POST['FreiesPSA']."', `Prostatavolumen` = '".$_POST['Prostatavolumen']."', `Uebergangszone` = '".$_POST['Uebergangszone']."', `DigitalePalpation` = '".$_POST['DigitalePalpation']."', `DigPalKommentar` = '".$_POST['DigPalKommentar']."', `TransrektalerUltraschall` = '".$_POST['TransrektalerUltraschall']."', `TransUltraKommentar` = '".$_POST['TransUltraKommentar']."', `IPSS` = '".$_POST['IPSS']."', `Koerpergewicht` = '".$_POST['Koerpergewicht']."', `Koerperlaenge` = '".$_POST['Koerperlaenge']."', `BMI` = '".$_POST['BMI']."', `PSAVorwerte` = '".$_POST['PSAVorwerte']."', `PSAVorDatum` = '".$_POST['PSAVorDatum']."', `BiopsieErgebnis` = '".$_POST['BiopsieErgebnis']."', `BiopsieposFund` = '".$_POST['BiopsieposFund']."', `BiopsieposGesamt` = '".$_POST['BiopsieposGesamt']."', `PIN` = '".$_POST['PIN']."', `PINFund` = '".$_POST['PINFund']."', `PINGesamt` = '".$_POST['PINGesamt']."', `Prostatitis` = '".$_POST['Prostatitis']."', `Gleason1` = '".$_POST['Gleason1']."', `Gleason2` = '".$_POST['Gleason2']."', `Gleason3` = '".$_POST['Gleason3']."', `Helpap` = '".$_POST['Helpap']."', `PIN3` = '".$_POST['PIN3']."', `AAH` = '".$_POST['AAH']."', `Benigne` = '".$_POST['Benigne']."', `BenigneKommentar` = '".$_POST['BenigneKommentar']."', `In1` = '".$_POST['In1']."', `In2` = '".$_POST['In2']."', `Skelettszintigramm` = '".$_POST['Skelettszintigramm']."', `Besprechung` = '".$_POST['Besprechung']."', `ReBiopsie` = '".$_POST['ReBiopsie']."', `PSAKontrolle` = '".$_POST['PSAKontrolle']."', `radikaleProstatektomie` = '".$_POST['radikaleProstatektomie']."', `Bestrahlung` = '".$_POST['Bestrahlung']."', `extern` = '".$_POST['extern']."', `HDR` = '".$_POST['HDR']."', `LDR` = '".$_POST['LDR']."', `ActiveSurveillance` = '".$_POST['ActiveSurveillance']."' WHERE ID = '".$_SESSION['PatientID']."';";
 	}
-	echo$sql;
 	$result = $db->query($sql)
 or die("Speichern fehlgeschlagen: " . mysql_error());
 }
@@ -263,7 +263,7 @@ echo'	<div id="head"><div id="fiktiv">KIS Fiktiv</div>
 		  
 		  
 		  
-
+echo '<div id="headline">Protokoll prätherapeutische Prostatakonferenz</div>';
 echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
     <legend>Patientendaten</legend>
@@ -285,13 +285,14 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="text" id="PSA" name="PSA" value="'.$_POST['PSA'].'" ';
 	  if ($_POST['PSA'] >= 3.2) echo 'class="wrong" ';
 	  echo'/>
-      ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), ';
-	  echo'
-	<label for="DatumPSA">Datum:</label>
-      <input type="date" id="DatumPSA" name="DatumPSA" value="'.$_POST['DatumPSA'].'" /><br/>';
+      ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), <br/>';
+
 	  if ($_POST['PSA'] >= 3.2) echo '<span class="right wrong">PSA zu hoch!</span><br />';
 	  if ($_POST['PSA'] < 0) echo '<span class="right wrong">PSA muss positiv sein!</span><br />';
-	echo'<label for="FreiesPSA" class="left">Freies PSA:</label>
+	  echo'
+	<label for="DatumPSA" class="left">PSA-Datum:</label>
+      <input type="date" id="DatumPSA" name="DatumPSA" value="'.$_POST['DatumPSA'].'" /><br/>';
+	  echo'<label for="FreiesPSA" class="left">Freies PSA:</label>
       <input type="text" id="FreiesPSA" name="FreiesPSA" value="'.$_POST['FreiesPSA'].'" />
       ng/ml, Quotient frei/gesamt - PSA<br/>
 	<label for="Prostatavolumen" class="left">Prostatavolumen gesamte Prostata:</label>
@@ -317,8 +318,8 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <label for="DigitalePalpation3">suspekt</label><br />
       <input type="radio" id="DigitalePalpation4" name="DigitalePalpation" value="VA" ';
 	  if ($_POST['DigitalePalpation']=='VA') echo 'checked="checked" ';
-	  echo 'class="right"/>
-      <label for="DigitalePalpation4">V.a. Organüberschreitung, Lokalisation:</label>
+	  echo 'class="right" style="vertical-align:top;"/>
+      <label for="DigitalePalpation4" style="vertical-align:top;">V.a. Organüberschreitung, Lokalisation:</label>
     <textarea name="DigPalKommentar">'.$_POST['DigPalKommentar'].'</textarea>
   </fieldset>
   <fieldset>
@@ -333,25 +334,31 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <label for="TransrektalerUltraschall2">dubios</label><br />
       <input type="radio" id="TransrektalerUltraschall3" name="TransrektalerUltraschall" value="suspekt" ';
 	  if ($_POST['TransrektalerUltraschall']=='suspekt') echo 'checked="checked" ';
-	  echo 'class="right" />
-      <label for="TransrektalerUltraschall3">suspekt, </label>
-    <label>Lokalisation:
+	  echo 'class="right"  style="vertical-align:top;"/>
+      <label for="TransrektalerUltraschall3"  style="vertical-align:top;">suspekt, Lokalisation:</label>
+    <label>
       <textarea name="TransUltraKommentar">'.$_POST['TransUltraKommentar'].'</textarea>
     </label><br />
-    <label for="IPSS" class="left">International Prostate Syndrom Score:</label>
+    <label for="IPSS" class="left">IPSS:</label>
       <input type="text" id="IPSS" name="IPSS" value="'.$_POST['IPSS'].'" />
       (0-35)</label>
     <br/>
-    <label for="Koerpergewicht" class="left">Körpergewicht:</label>
-      <input type="text" id="Koerpergewicht" name="Koerpergewicht" value="'.$_POST['Koerpergewicht'].'" />
-      kg<br />
-    <label for="Koerperlaenge" class="left">Körperlänge:</label>
+    <label for="Koerpergewicht" class="left">Körpergewicht:</label>';
+if ($_POST['Koerpergewicht']==1) $_POST['Koerpergewicht']=null;
+	echo '<input type="text" id="Koerpergewicht" name="Koerpergewicht" value="'.$_POST['Koerpergewicht'].'" />';
+
+echo'	kg<br />
+    <label for="Koerperlaenge" class="left">Körperlänge:</label>';
+	if ($_POST['Koerperlaenge']==1) $_POST['Koerperlaenge']=null;
+	echo '
       <input type="text" id="Koerperlaenge" name="Koerperlaenge" value="'.$_POST['Koerperlaenge'].'" />
       cm<br />
   </fieldset>
   <fieldset>
     <legend>Body-Mass-Index</legend>';
-	$_POST['BMI'] = round($_POST['Koerpergewicht'] / ($_POST['Koerperlaenge']/100 * $_POST['Koerperlaenge']/100));
+	if ($_POST['Koerperlaenge'] == 0) $_POST['BMI'] = null;
+	else $_POST['BMI'] = round($_POST['Koerpergewicht'] / ($_POST['Koerperlaenge']/100 * $_POST['Koerperlaenge']/100));
+	
 	echo '
     <input type="text" name="display" value="'.$_POST['BMI'].'" disabled class="right" /> (wird automatisch berechnet)
 	<input type="hidden" name="BMI" value="'.$_POST['BMI'].'">
@@ -370,18 +377,18 @@ echo'<form action="formular.php?'.SID.'" method="post">
 	  if ($_POST['BiopsieErgebnis']) echo 'checked="checked"';
 	  echo' class="right"/>
       <label for="BiopsieErgebnis">Positiv</label>
-      <input type="text" name="BiopsieposFund" value="'.$_POST['BiopsieposFund'].'" />
+      <input type="text" name="BiopsieposFund" value="'.$_POST['BiopsieposFund'].'" size="5"/>
       /
-      <input type="text" name="BiopsieposGesamt" value="'.$_POST['BiopsieposGesamt'].'" />
+      <input type="text" name="BiopsieposGesamt" value="'.$_POST['BiopsieposGesamt'].'" size="5" />
     
     <br/>
       <input type="checkbox" id="PIN" name="PIN" value="1" ';
 	  if ($_POST['PIN']) echo 'checked="checked"';
 	  echo' class="right" />
       <label for="PIN">PIN</label>
-      <input type="text" name="PINFund" value="'.$_POST['PINFund'].'" />
+      <input type="text" name="PINFund" value="'.$_POST['PINFund'].'" size="5" />
       /
-      <input type="text" name="PINGesamt" value="'.$_POST['PINGesamt'].'" />
+      <input type="text" name="PINGesamt" value="'.$_POST['PINGesamt'].'" size="5" />
     <br/>
       <input type="checkbox" id="Prostatitis" name="Prostatitis" value="1" ';
 	  if ($_POST['Prostatitis']) echo 'checked="checked"';
@@ -390,17 +397,17 @@ echo'<form action="formular.php?'.SID.'" method="post">
     <br/>
     <br/>
     <label for="Gleason" class="left">Gleason:</label>
-      <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" />
+      <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" size="5" />
       +
-      <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" />
+      <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" size="5" />
       =';
 	  $_POST['Gleason3'] = $_POST['Gleason1'] + $_POST['Gleason2'];
 	  echo '
-      <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled />
+      <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled size="5" />
 	  <input type="hidden" name="Gleason3" value="'.$_POST['Gleason3'].'">
     <br/>
     <label for="Helpap" class="left">Helpap-Grad:</label>
-      <select id="Helpap" name="Helpap">
+      <select id="Helpap" name="Helpap" style="width: 60px; background: #ddd;">
         <option> </option>
         <option'; if ($_POST['Helpap']=="G1a") echo" selected";
 		echo'> G1a</option>
@@ -417,7 +424,7 @@ echo'<form action="formular.php?'.SID.'" method="post">
       </select>
     <br>
     <label for="PIN3" class="left">PIN 3&deg;:</label>
-      <select id="PIN3" name="PIN3">
+      <select id="PIN3" name="PIN3" style="width: 60px; background: #ddd;">
         <option> </option>
         <option'; if ($_POST['PIN3']=="PIN 1") echo" selected";
 		echo'> PIN 1</option>
@@ -441,9 +448,9 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <textarea id="BenigneKommentar" name="BenigneKommentar">'.$_POST['BenigneKommentar'].'</textarea>
     <br/>
     <label for="In" class="right">In</label>
-      <input type="text" id="In" name="In1" value="'.$_POST['In1'].'" />
+      <input type="text" id="In" name="In1" value="'.$_POST['In1'].'" size="5" />
       /
-      <input type="text" id="In" name="In2" value="'.$_POST['In2'].'" />
+      <input type="text" id="In" name="In2" value="'.$_POST['In2'].'" size="5" />
       Stanzen, Details siehe "Befundbericht-Prostatabiopsie"
   </fieldset>
   <fieldset>
@@ -501,14 +508,20 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <label for="ActiveSurveillance">"Active Surveillance"</label>
   </fieldset>
   <br/>
-  <input type="submit" name="submit" value="Formular speichern" />
-</form>
-<form action="login.php?'.SID.'" method="post">
-<input type="submit" name="zurück" value="Zurück"></form>';
+  <div id="savebutton"><div id="boxbutton">
+  <input type="button" value="Zurück" name="back_button"
+onClick="javascript:history.back(1)">
+  <input type="submit" name="submit" value="Formular speichern">
+  <input type="submit" name="delete" value="Löschen">
+
+  </form>';
+
 if (!$row==NULL){
 echo'<form action="formular.php?'.SID.'" method="post">
-<input type="submit" name="delete" value="Löschen"></form>';
+</form>';
 }
+echo '<form action="login.php?'.SID.'" method="post">
+</form></div></div>';
 // von Matthias
 echo'  </div>
   </div>';

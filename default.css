@@ -65,6 +65,13 @@ fieldset {
 	height: 60px;
 	float:left;
 }
+
+#boxbutton {
+	width: 600px;
+	height: 70px;
+	float:left;
+}
+
 #fiktiv {
 	font-size: 16px;
 	margin-left: 10px;
