@@ -319,7 +319,7 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="radio" id="DigitalePalpation4" name="DigitalePalpation" value="VA" onclick="document.getElementById(\'tx1\').disabled=\'\'"' ;
 	  if ($_POST['DigitalePalpation']=='VA') echo 'checked="checked" ';
 	  echo 'class="right" style="vertical-align:top;"/>
-      <label for="DigitalePalpation4" style="vertical-align:top;">V.a. Organüberschreitung, Lokalisation:</label>
+      <label for="DigitalePalpation4">V.a. Organüberschreitung</label><br/><label class="left" style="vertical-align:top;"> Lokalisation:</label>
     <textarea name="DigPalKommentar" id="tx1">'.$_POST['DigPalKommentar'].'</textarea>
   </fieldset>
   <fieldset>
@@ -335,8 +335,9 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="radio" id="TransrektalerUltraschall3" name="TransrektalerUltraschall" value="suspekt" onclick="document.getElementById(\'tx2\').disabled=\'\'"';
 	  if ($_POST['TransrektalerUltraschall']=='suspekt') echo 'checked="checked" ';
 	  echo 'class="right"  style="vertical-align:top;"/>
-      <label for="TransrektalerUltraschall3"  style="vertical-align:top;">suspekt, Lokalisation:</label>
-    <label>
+      <label for="TransrektalerUltraschall3">suspekt,</label><br><label class="left" style="vertical-align:top;"> Lokalisation:</label>
+   
+	<label>
       <textarea name="TransUltraKommentar" id="tx2">'.$_POST['TransUltraKommentar'].'</textarea>
     </label><br />
     <label for="IPSS" class="left">IPSS:</label>
