@@ -273,7 +273,12 @@ echo'	<div id="head"><div id="fiktiv">KIS Fiktiv</div>
 		  
 		  
 		  
-echo '<div id="headline">Protokoll prätherapeutische Prostatakonferenz</div>';
+echo '<div id="headline">Protokoll prätherapeutische Prostatakonferenz';
+if (isset($_POST['submit'])) echo ' wurde gespeichert!';
+else if (isset( $_POST['delete'] )) echo ' wurde gelöscht!';
+else echo ' anlegen / ändern';
+echo'
+</div>';
 echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
     <legend>Patientendaten</legend>
