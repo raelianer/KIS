@@ -248,6 +248,24 @@ echo'<!DOCTYPE HTML>
 <link rel="stylesheet" href="default.css" type="text/css" />
 </head>
 <body>';
+// Dem Matthias sein head2:
+echo'	<div id="head"><div id="fiktiv">KIS Fiktiv</div>
+	 <div id="menu">
+    	  <ul>';
+		  
+// Inhalt aus der login.php
+    		echo '<li><a href=\'login.php?PHPSESSID='.session_id().'\'>Home</a></li>';
+    		echo '<li><a href=\'logout.php?PHPSESSID='.session_id().'\'>Logout</a></li>';
+		echo '<li><a href=\'doku.php?PHPSESSID='.session_id().'\'>Dokumentation</a></li>';
+    	  echo '</ul>';
+  	  echo '</div>';
+	echo '</div>';
+	echo '<div id="content">';
+	echo '<div id="label">';
+	echo '<div id="box">';		  
+		  
+		  
+		  
 
 echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
@@ -494,6 +512,10 @@ if (!$row==NULL){
 echo'<form action="formular.php?'.SID.'" method="post">
 <input type="submit" name="delete" value="Löschen"></form>';
 }
+// von Matthias
+echo'  </div>
+  </div>';
+  
 echo '</body>
 </html>';
 ?>
