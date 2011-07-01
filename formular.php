@@ -3,7 +3,7 @@ include 'config.php';
 error_reporting(E_ALL);
 
 /*
-	FÃ¤lle, die zu unterscheiden sind:
+	Fälle, die zu unterscheiden sind:
 	* Nutzer nicht eingeloggt
 		-> weiterleiten zur index.html
 		
@@ -16,7 +16,7 @@ error_reporting(E_ALL);
 
 */
 
-// PrÃ¼fen, ob der Nutzer eingeloggt ist
+// Prüfen, ob der Nutzer eingeloggt ist
 if ( (!isset( $_SESSION['permission'] ) ) || $_SESSION['permission']==false) header('Location: index.html');
 
 if (!$_SESSION['reading']){
@@ -34,15 +34,15 @@ $db = new mysqli(HOST, USER, PASS, DB);
 	$_SESSION['PatientID'] = $_POST['patientid'];
 	}
 	
-	// Formular lÃ¶schen
+	// Formular löschen
 if ( (isset($_POST['delete'])) ) {
 	$sql = "DELETE FROM `kis`.`formular` WHERE `formular`.`ID` = 3";
 	$result = $db->query($sql)
 or die("Anfrage fehlgeschlagen1: " . mysql_error());
-echo "Formular gelÃ¶scht!";
+echo "Formular gelöscht!";
 }
 
-// Datenbankabfrage durchfÃ¼hren
+// Datenbankabfrage durchführen
 // $sql = "SELECT * FROM `patient` INNER JOIN `formular` ON `patient`.`patientid` = `formular`.`ID` WHERE `patientid` =".$_SESSION['PatientID']."";
 $sql = "SELECT * FROM `patient` WHERE `patientid` =".$_SESSION['PatientID']."";
 $result = $db->query($sql)
@@ -111,7 +111,7 @@ if ( ($row==NULL) && (!isset($_POST['submit'])) ){
 
 
 // index -> passwort eingeben mit POST
-// login.php -> prÃ¼ft Login-Daten und wÃ¤hlt Formular aus mit POST FormularID
+// login.php -> prüft Login-Daten und wählt Formular aus mit POST FormularID
 
 
 //		$_SESSION['permission'] = true; -> eingeloggt
@@ -170,7 +170,7 @@ if ( (!isset($_POST['submit'])) && (!$row==NULL) ) {
 	$_POST['ActiveSurveillance'] = $row->ActiveSurveillance;
 } 
 
-// Formular wurde abgeschickt... Korrektur fÃ¼r leere Variablen
+// Formular wurde abgeschickt... Korrektur für leere Variablen
 if (isset( $_POST['submit'] )) {
 // Benutzer hat Formular abgeschickt, aber leere Checkboxen sind nicht gleich 0!
 
@@ -225,13 +225,13 @@ if (!isset( $_POST['ActiveSurveillance'] )) $_POST['ActiveSurveillance'] = 0;
 
 // Wenn abgesendet wird, dann soll auch gespeichert werden
 if ($_SESSION['writing'] and isset( $_POST['submit'] )){
-	// Falls kein Datenbankeintrag fÃ¼r das Formular vorhanden -> neuen Datensatz anlegen!
+	// Falls kein Datenbankeintrag für das Formular vorhanden -> neuen Datensatz anlegen!
 	if ($row==NULL) {
 	$sql = "INSERT INTO `".DB."`.`formular` (`ID`, `Praetherapeutisch`, `PSA`, `DatumPSA`, `FreiesPSA`, `Prostatavolumen`, `Uebergangszone`, `DigitalePalpation`, `DigPalKommentar`, `TransrektalerUltraschall`, `TransUltraKommentar`, `IPSS`, `Koerpergewicht`, `Koerperlaenge`, `BMI`, `PSAVorwerte`, `PSAVorDatum`, `BiopsieErgebnis`, `BiopsieposFund`, `BiopsieposGesamt`, `PIN`, `PINFund`, `PINGesamt`, `Prostatitis`, `Gleason1`, `Gleason2`, `Gleason3`, `Helpap`, `PIN3`, `AAH`, `Benigne`, `BenigneKommentar`, `In1`, `In2`, `Skelettszintigramm`, `Besprechung`, `ReBiopsie`, `PSAKontrolle`, `radikaleProstatektomie`, `Bestrahlung`, `extern`, `HDR`, `LDR`, `ActiveSurveillance`) VALUES ('".$_SESSION['PatientID']."', '".$_POST['Praetherapeutisch']."', '".$_POST['PSA']."', '".$_POST['DatumPSA']."', '".$_POST['FreiesPSA']."', '".$_POST['Prostatavolumen']."', '".$_POST['Uebergangszone']."', '".$_POST['DigitalePalpation']."', '".$_POST['DigPalKommentar']."', '".$_POST['TransrektalerUltraschall']."', '".$_POST['TransUltraKommentar']."', '".$_POST['IPSS']."', '".$_POST['Koerpergewicht']."', '".$_POST['Koerperlaenge']."', '".$_POST['BMI']."', '".$_POST['PSAVorwerte']."', '".$_POST['PSAVorDatum']."', '".$_POST['BiopsieErgebnis']."', '".$_POST['BiopsieposFund']."', '".$_POST['BiopsieposGesamt']."', '".$_POST['PIN']."', '".$_POST['PINFund']."', '".$_POST['PINGesamt']."', '".$_POST['Prostatitis']."', '".$_POST['Gleason1']."', '".$_POST['Gleason2']."', '".$_POST['Gleason3']."', '".$_POST['Helpap']."', '".$_POST['PIN3']."', '".$_POST['AAH']."', '".$_POST['Benigne']."', '".$_POST['BenigneKommentar']."', '".$_POST['In1']."', '".$_POST['In2']."', '".$_POST['Skelettszintigramm']."', '".$_POST['Besprechung']."', '".$_POST['ReBiopsie']."', '".$_POST['PSAKontrolle']."', '".$_POST['radikaleProstatektomie']."', '".$_POST['Bestrahlung']."', '".$_POST['extern']."', '".$_POST['HDR']."', '".$_POST['LDR']."', '".$_POST['ActiveSurveillance']."');";
 	$sql2 = "UPDATE patient SET formularid = '".$stammdaten->patientid."' WHERE patientid = '".$_SESSION['PatientID']."';";
 	$result2 = $db->query($sql2);
 	} else {
-	// Falls Formular bereits vorhanden -> Datensatz Ã¤ndern!
+	// Falls Formular bereits vorhanden -> Datensatz ändern!
 	$sql = "UPDATE `".DB."`.`formular` SET `Praetherapeutisch` = '".$_POST['Praetherapeutisch']."', `PSA` = '".$_POST['PSA']."', `DatumPSA` = '".$_POST['DatumPSA']."', `FreiesPSA` = '".$_POST['FreiesPSA']."', `Prostatavolumen` = '".$_POST['Prostatavolumen']."', `Uebergangszone` = '".$_POST['Uebergangszone']."', `DigitalePalpation` = '".$_POST['DigitalePalpation']."', `DigPalKommentar` = '".$_POST['DigPalKommentar']."', `TransrektalerUltraschall` = '".$_POST['TransrektalerUltraschall']."', `TransUltraKommentar` = '".$_POST['TransUltraKommentar']."', `IPSS` = '".$_POST['IPSS']."', `Koerpergewicht` = '".$_POST['Koerpergewicht']."', `Koerperlaenge` = '".$_POST['Koerperlaenge']."', `BMI` = '".$_POST['BMI']."', `PSAVorwerte` = '".$_POST['PSAVorwerte']."', `PSAVorDatum` = '".$_POST['PSAVorDatum']."', `BiopsieErgebnis` = '".$_POST['BiopsieErgebnis']."', `BiopsieposFund` = '".$_POST['BiopsieposFund']."', `BiopsieposGesamt` = '".$_POST['BiopsieposGesamt']."', `PIN` = '".$_POST['PIN']."', `PINFund` = '".$_POST['PINFund']."', `PINGesamt` = '".$_POST['PINGesamt']."', `Prostatitis` = '".$_POST['Prostatitis']."', `Gleason1` = '".$_POST['Gleason1']."', `Gleason2` = '".$_POST['Gleason2']."', `Gleason3` = '".$_POST['Gleason3']."', `Helpap` = '".$_POST['Helpap']."', `PIN3` = '".$_POST['PIN3']."', `AAH` = '".$_POST['AAH']."', `Benigne` = '".$_POST['Benigne']."', `BenigneKommentar` = '".$_POST['BenigneKommentar']."', `In1` = '".$_POST['In1']."', `In2` = '".$_POST['In2']."', `Skelettszintigramm` = '".$_POST['Skelettszintigramm']."', `Besprechung` = '".$_POST['Besprechung']."', `ReBiopsie` = '".$_POST['ReBiopsie']."', `PSAKontrolle` = '".$_POST['PSAKontrolle']."', `radikaleProstatektomie` = '".$_POST['radikaleProstatektomie']."', `Bestrahlung` = '".$_POST['Bestrahlung']."', `extern` = '".$_POST['extern']."', `HDR` = '".$_POST['HDR']."', `LDR` = '".$_POST['LDR']."', `ActiveSurveillance` = '".$_POST['ActiveSurveillance']."' WHERE ID = '".$_SESSION['PatientID']."';";
 	}
 	echo$sql;
@@ -243,7 +243,7 @@ or die("Speichern fehlgeschlagen: " . mysql_error());
 echo'<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
 <title>KIS Fiktiv</title>
 <link rel="stylesheet" href="default.css" type="text/css" />
 </head>
@@ -281,7 +281,7 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="checkbox" id="Praetherapeutisch" name="Praetherapeutisch" value="1" ';
 	  if ($_POST['Praetherapeutisch']) echo 'checked="checked"';
 	  echo' class="right"/>
-	  <label for="Praetherapeutisch">PrÃ¤therapeutisch</label>
+	  <label for="Praetherapeutisch">Prätherapeutisch</label>
     <br />
     <label for="PSA" class="left">PSA:</label>
       <input type="text" id="PSA" name="PSA" value="'.$_POST['PSA'].'" ';
@@ -299,7 +299,7 @@ echo'<form action="formular.php?'.SID.'" method="post">
 	<label for="Prostatavolumen" class="left">Prostatavolumen gesamte Prostata:</label>
       <input type="text" id="Prostatavolumen" name="Prostatavolumen" value="'.$_POST['Prostatavolumen'].'" />
       ccm,<br />
-    <label for="Uebergangszone" class="left">Ãœbergangszone:</label>
+    <label for="Uebergangszone" class="left">Übergangszone:</label>
       <input type="text" id="Uebergangszone" name="Uebergangszone" value="'.$_POST['Uebergangszone'].'" />
       cmm
   </fieldset>
@@ -320,7 +320,7 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="radio" id="DigitalePalpation4" name="DigitalePalpation" value="VA" ';
 	  if ($_POST['DigitalePalpation']=='VA') echo 'checked="checked" ';
 	  echo 'class="right"/>
-      <label for="DigitalePalpation4">V.a. OrganÃ¼berschreitung, Lokalisation:</label>
+      <label for="DigitalePalpation4">V.a. Organüberschreitung, Lokalisation:</label>
     <textarea name="DigPalKommentar">'.$_POST['DigPalKommentar'].'</textarea>
   </fieldset>
   <fieldset>
@@ -344,10 +344,10 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="text" id="IPSS" name="IPSS" value="'.$_POST['IPSS'].'" />
       (0-35)</label>
     <br/>
-    <label for="Koerpergewicht" class="left">KÃ¶rpergewicht:</label>
+    <label for="Koerpergewicht" class="left">Körpergewicht:</label>
       <input type="text" id="Koerpergewicht" name="Koerpergewicht" value="'.$_POST['Koerpergewicht'].'" />
       kg<br />
-    <label for="Koerperlaenge" class="left">KÃ¶rperlÃ¤nge:</label>
+    <label for="Koerperlaenge" class="left">Körperlänge:</label>
       <input type="text" id="Koerperlaenge" name="Koerperlaenge" value="'.$_POST['Koerperlaenge'].'" />
       cm<br />
   </fieldset>
@@ -388,7 +388,7 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="checkbox" id="Prostatitis" name="Prostatitis" value="1" ';
 	  if ($_POST['Prostatitis']) echo 'checked="checked"';
 	  echo' class="right" />
-      <label for="Prostatitis">StÃ¤rkergradige Prostatitis</label>
+      <label for="Prostatitis">Stärkergradige Prostatitis</label>
     <br/>
     <br/>
     <label for="Gleason" class="left">Gleason:</label>
@@ -489,12 +489,12 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <input type="checkbox" id="HDR" name="HDR" value="1" ';
 	  if ($_POST['HDR']) echo 'checked="checked"';
 	  echo'class="rightPlus" />
-      <label for="HDR">HDR-Brachytherapie mÃ¶glich</label>
+      <label for="HDR">HDR-Brachytherapie möglich</label>
     <br/>
       <input type="checkbox" id="LDR" name="LDR" id="empf1" value="1" ';
 	  if ($_POST['LDR']) echo 'checked="checked"';
 	  echo'class="rightPlus" />
-      <label for="LDR">LDR-Brachytherapie mÃ¶glich</label></span>
+      <label for="LDR">LDR-Brachytherapie möglich</label></span>
     <br/>
     <br/>
       <input type="checkbox" id="ActiveSurveillance" name="ActiveSurveillance" value="1" ';
@@ -506,10 +506,10 @@ echo'<form action="formular.php?'.SID.'" method="post">
   <input type="submit" name="submit" value="Formular speichern" />
 </form>
 <form action="login.php?'.SID.'" method="post">
-<input type="submit" name="zurÃ¼ck" value="ZurÃ¼ck"></form>';
+<input type="submit" name="zurück" value="Zurück"></form>';
 if (!$row==NULL){
 echo'<form action="formular.php?'.SID.'" method="post">
-<input type="submit" name="delete" value="LÃ¶schen"></form>';
+<input type="submit" name="delete" value="Löschen"></form>';
 }
 // von Matthias
 echo'  </div>
