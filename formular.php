@@ -20,13 +20,16 @@ error_reporting(E_ALL);
 if ( (!isset( $_SESSION['permission'] ) ) || $_SESSION['permission']==false) header('Location: index.html');
 
 if (!$_SESSION['reading']){
-header('Location: leserecht.php?PHPSESSID="'.session_id());
+header('Location: leserecht.php?PHPSESSID="'.session_id().'"');
+}
+if (isset($_POST['back'])) {
+header('Location: login.php?PHPSESSID="'.session_id().'"');
 }
 if (isset( $_POST['submit'] ) and !$_SESSION['writing']){
-header('Location: schreibrecht.php?PHPSESSID="'.session_id());
+header('Location: schreibrecht.php?PHPSESSID="'.session_id().'"');
 }
 if (isset( $_POST['delete'] ) and !$_SESSION['writing']){
-header('Location: schreibrecht.php?PHPSESSID="'.session_id());
+header('Location: schreibrecht.php?PHPSESSID="'.session_id().'"');
 }
 
 
@@ -539,19 +542,13 @@ if (isset( $_POST['submit'] )or(!$row==NULL))
   </fieldset>
   <br/>
   <div id="savebutton"><div id="boxbutton">
-  <input type="button" value="Zurück" name="back_button"
-onClick="javascript:history.back(1)">
+  <input type="submit" name="back" value="Zurück">
   <input type="submit" name="submit" value="Formular speichern">
   <input type="submit" name="delete" value="Löschen">
 
   </form>';
 
-if (!$row==NULL){
-echo'<form action="formular.php?'.SID.'" method="post">
-</form>';
-}
-echo '<form action="login.php?'.SID.'" method="post">
-</form></div></div>';
+echo '</div></div>';
 // von Matthias
 echo'  </div>
   </div>';
