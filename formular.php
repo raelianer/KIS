@@ -395,7 +395,7 @@ echo'	kg<br />
   </fieldset>
   <fieldset>
     <legend>Biopsie-Ergebnis</legend>
-    Wieviele Biopsien zeigen PCa?<br/>
+    <label class="right">Wieviele Biopsien zeigen PCa?</label><br/>
       <input type="checkbox" id="BiopsieErgebnis" name="BiopsieErgebnis" value="1" ';
 	  if ($_POST['BiopsieErgebnis']) echo 'checked="checked"';
 	  echo' class="right"/>
@@ -514,10 +514,7 @@ if (isset( $_POST['submit'] )or(!$row==NULL))
       <label for="radikaleProstatektomie">radikale Prostatekonomie</label>
     <br/>
     <br/>
-      <input type="checkbox" id="Bestrahlung" name="Bestrahlung" value="1" ';
-	  if ($_POST['Bestrahlung']) echo 'checked="checked"';
-	  echo'class="right" />
-      <label for="Bestrahlung">Bestrahlung</label>
+      <label class="right" for="Bestrahlung">Bestrahlung:</label>
     <br/>
       <input type="checkbox" id="extern" name="extern" value="1" ';
 	  if ($_POST['extern']) echo 'checked="checked"';
