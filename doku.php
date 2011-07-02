@@ -5,7 +5,7 @@
 	function anzeigen(){
 	echo '
 		<b>Installation:</b><br>
-		Die <a href="http://www.kis-fiktiv.de.ms/quellcode.zip">Quellcodedateien</a> werden auf einen PHP- und datenbankfähigen Server kopiert, z.B. auf  
+		Die <a href="http://www.kis-fiktiv.bplaced.net/quellcode.zip">Quellcodedateien</a> werden auf einen PHP- und datenbankfähigen Server kopiert, z.B. auf  
 		<a href="http://www.bplaced.net/">http://www.bplaced.net/</a>. Die Datenbank wird erstellt indem die Datei gen.php
 		auf dem Server ausgeführt wird. Dazu muss der Hostname, Benutzername, Passwort, Name der eigenen Datenbank vorher in 
 		die Datei config.php eingetragen werden.<br><br>
