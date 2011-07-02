@@ -65,13 +65,11 @@ fieldset {
 	height: 60px;
 	float:left;
 }
-
 #boxbutton {
 	width: 600px;
 	height: 70px;
 	float:left;
 }
-
 #fiktiv {
 	font-size: 16px;
 	margin-left: 10px;
@@ -127,10 +125,6 @@ fieldset {
 	margin-top: 0px;
 	text-align:left;
 }
-
-
-
-
 label, select, input[type=checkbox], input[type=radio], input[type=button], input[type=submit] {
 	cursor: pointer;
 }
@@ -154,16 +148,50 @@ input:focus, textarea:focus {
 .wrong {
 	background-color:red;
 }
-.rightPlus{
+.rightPlus {
 	margin-left:35%;
 }
-.textfeld{
+.textfeld {
 	vertical-align:top;
 }
-#Helpap, #PIN3{
+#Helpap, #PIN3 {
 	width: 75px;
 	background: #ddd;
 }
-.number{
+.number {
 	width:50px;
+}
+/* Relativer Tooltip */
+.tooltip, .tooltip:link, .tooltip:visited, .tooltip:active {
+	position: relative;
+}
+.tooltip:hover {
+	background: transparent;
+}
+.tooltip span {
+	display: none;
+	text-decoration: none;
+}
+.tooltip:hover span {
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 0;
+	z-index: 100;
+	color: #000000;
+	border:1px solid #000000;
+	background: #FFFFCC;
+	font: 12px Verdana, sans-serif;
+	text-align: left;
+}
+.tooltip span b {
+	display: block;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-weigth: bold;
+	color: yellow;
+	background-color: gray;
+	border: 0px;
+	border-bottom: 1px solid black;
 }

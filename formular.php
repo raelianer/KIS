@@ -286,7 +286,7 @@ echo'
 echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
     <legend>Patientendaten</legend>
-	<label for="Name" class="left">Name:</label>
+	<label for="Name" class="left"><span class="tooltip">Name:<span>Tooltip, yeah!</span></span></label>
       <input type="text" id="Name" name="Name" value="'.$_POST['Name'].'" readonly="readonly" /><br />
 	<label for="Vorname" class="left">Vorname:</label>
       <input type="text" id="Vorname" name="Vorname" value="'.$_POST['Vorname'].'" readonly="readonly" /><br />
