@@ -12,7 +12,7 @@
 	$db = new mysqli(HOST, USER, PASS, DB);
 	echo '<form action="formular.php?PHPSESSID="'.session_id().' method="post">';
 	echo '<fieldset>';
-        echo '<legend>Patienten- und Formularauswahl</legend>';
+        echo '<legend>Patientenauswahl</legend>';
 	$sql2 = 'SELECT *
 	FROM
     	patient';
@@ -23,7 +23,7 @@
 
 			  if ($row['formularid']) echo ' - Formular prätherapeutische Prostatakonferenz gespeichert';
 			else 
-			  echo ' - Es exisistiert bisher kein gespeichertes Formular';
+			  echo ' - kein gespeichertes Formular';
 
 
 		     echo '</option>';
