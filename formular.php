@@ -285,13 +285,13 @@ echo'
 </div>';
 echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
-    <legend>Patientendaten</legend>
-	<label for="Name" class="left"><span class="tooltip">Name:<span>Tooltip, yeah!</span></span></label>
-      <input type="text" id="Name" name="Name" value="'.$_POST['Name'].'" readonly="readonly" /><br />
-	<label for="Vorname" class="left">Vorname:</label>
-      <input type="text" id="Vorname" name="Vorname" value="'.$_POST['Vorname'].'" readonly="readonly" /><br />
-	<label for="Geburtsdatum" class="left">Geburtsdatum:</label>
-      <input type="date" id="Geburtsdatum" name="Geburtsdatum" value="'.$_POST['Geburtsdatum'].'" readonly="readonly" /><br />
+    <legend>Patientendaten</legend><span class="tooltip">
+	<label for="Name" class="left">Name:</label>
+      <input type="text" id="Name" name="Name" value="'.$_POST['Name'].'" readonly="readonly" /><span>Daten sind nicht änderbar</span></span><br />
+	<span class="tooltip"><label for="Vorname" class="left">Vorname:</label><span>Daten sind nicht änderbar</span>
+      <input type="text" id="Vorname" name="Vorname" value="'.$_POST['Vorname'].'" readonly="readonly" /></span><br />
+	<span class="tooltip"><label for="Geburtsdatum" class="left">Geburtsdatum:</label><span>Daten sind nicht änderbar</span>
+      <input type="date" id="Geburtsdatum" name="Geburtsdatum" value="'.$_POST['Geburtsdatum'].'" readonly="readonly" /></span><br />
   </fieldset>
   <fieldset>
     <legend>Biopsie</legend>
