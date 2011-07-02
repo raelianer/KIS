@@ -271,12 +271,13 @@ echo'	<div id="head"><div id="fiktiv">KIS Fiktiv</div>
 	echo '<div id="label">';
 	echo '<div id="box2">';		  
 		  
-		  
+$_SESSION['fehler']=false;  
 		  
 echo '<div id="headline">Protokoll prätherapeutische Prostatakonferenz';
 if (isset($_POST['submit'])) echo ' wurde gespeichert!';
 else if (isset( $_POST['delete'] )) echo ' wurde gelöscht!';
 else echo ' anlegen / ändern';
+
 echo'
 </div>';
 echo'<form action="formular.php?'.SID.'" method="post">
@@ -298,12 +299,12 @@ echo'<form action="formular.php?'.SID.'" method="post">
     <br />
     <label for="PSA" class="left">PSA:</label>
       <input type="text" id="PSA" name="PSA" value="'.$_POST['PSA'].'" ';
-	  if ($_POST['PSA'] >= 3.2) echo 'class="wrong" ';
+	  if ($_POST['PSA'] >= 3.2) {echo 'class="wrong" ';$_SESSION['fehler']=true;}
 	  echo'/>
       ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), <br/>';
 
-	  if ($_POST['PSA'] >= 3.2) echo '<span class="right wrong">PSA zu hoch!</span><br />';
-	  if ($_POST['PSA'] < 0) echo '<span class="right wrong">PSA muss positiv sein!</span><br />';
+	  if ($_POST['PSA'] >= 3.2) {echo '<span class="right wrong">PSA zu hoch!</span><br />';$_SESSION['fehler']=true;}
+	  if ($_POST['PSA'] < 0) {echo '<span class="right wrong">PSA muss positiv sein!</span><br />';$_SESSION['fehler']=true;}
 	  echo'
 	<label for="DatumPSA" class="left">PSA-Datum:</label>
       <input type="date" id="DatumPSA" name="DatumPSA" value="'.$_POST['DatumPSA'].'" /><br/>';
@@ -357,11 +358,11 @@ echo'<form action="formular.php?'.SID.'" method="post">
     </label><br />
     <label for="IPSS" class="left">IPSS:</label>
       <input type="text" id="IPSS" name="IPSS" value="'.$_POST['IPSS'].'"';
-	if ($_POST['IPSS'] > 35 or $_POST['IPSS'] < 0) echo 'class="wrong" ';
+	if ($_POST['IPSS'] > 35 or $_POST['IPSS'] < 0) {echo 'class="wrong" ';$_SESSION['fehler']=true;}
 	echo'	  />';
     echo'  (0-35)</label>
     <br/>';
-	if ($_POST['IPSS'] > 35 or $_POST['IPSS'] < 0) echo '<span class="right wrong">IPSS muss >=0 und <=35 sein !</span><br />';
+	if ($_POST['IPSS'] > 35 or $_POST['IPSS'] < 0) {echo '<span class="right wrong">IPSS muss >=0 und <=35 sein !</span><br />';$_SESSION['fehler']=true;}
 	echo'
     <label for="Koerpergewicht" class="left">Körpergewicht:</label>';
 if ($_POST['Koerpergewicht']==1) $_POST['Koerpergewicht']=null;
@@ -419,13 +420,13 @@ echo'	kg<br />
     <label for="Gleason" class="left">Gleason:</label>
       <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" size="5"';
 if (isset( $_POST['submit'] ) or (!$row==NULL))
-if ($_POST['Gleason1']<1 or $_POST['Gleason1'] > 5) echo 'class="wrong" ';
+if ($_POST['Gleason1']<1 or $_POST['Gleason1'] > 5) {echo 'class="wrong" ';$_SESSION['fehler']=true;}
 
 echo'	  />
       +
       <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" size="5"';
 if (isset( $_POST['submit'] ) or (!$row==NULL))
-	  if ($_POST['Gleason2']<1 or $_POST['Gleason2'] > 5) echo 'class="wrong" ';
+	  if ($_POST['Gleason2']<1 or $_POST['Gleason2'] > 5) {echo 'class="wrong" ';$_SESSION['fehler']=true;}
 echo'	  />
       =';
 	  $_POST['Gleason3'] = $_POST['Gleason1'] + $_POST['Gleason2'];
@@ -434,7 +435,7 @@ echo'	  />
 	  <input type="hidden" name="Gleason3" value="'.$_POST['Gleason3'].'">
     <br/>';
 if (isset( $_POST['submit'] )or(!$row==NULL))
-	if ($_POST['Gleason1']>5 or $_POST['Gleason1']<1 or $_POST['Gleason2']>5 or $_POST['Gleason2']<1) echo '<span class="right wrong">Werte müssen >1 und <=5 sein</span><br />';
+	if ($_POST['Gleason1']>5 or $_POST['Gleason1']<1 or $_POST['Gleason2']>5 or $_POST['Gleason2']<1) {echo '<span class="right wrong">Werte müssen >1 und <=5 sein</span><br />';$_SESSION['fehler']=true;}
 	echo'
     <label for="Helpap" class="left">Helpap-Grad:</label>
       <select id="Helpap" name="Helpap" style="width: 60px; background: #ddd;">
@@ -555,6 +556,18 @@ echo '<form action="login.php?'.SID.'" method="post">
 // von Matthias
 echo'  </div>
   </div>';
+  
+if (isset( $_POST['submit'] ) and isset($_SESSION['fehler']) and $_SESSION['fehler']==true){
+echo '
+	<script language="javascript" type="text/javascript">
+	alert(\'Sie müssen einige Eingaben überprüfen!\' );
+	</script>
+	';
+}
+
+
+  
+  
   
 echo '</body>
 </html>';
