@@ -334,8 +334,8 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <label for="DigitalePalpation3">suspekt</label><br />
       <input type="radio" id="DigitalePalpation4" name="DigitalePalpation" value="VA" onclick="document.getElementById(\'tx1\').disabled=\'\'"' ;
 	  if ($_POST['DigitalePalpation']=='VA') echo 'checked="checked" ';
-	  echo 'class="right" style="vertical-align:top;"/>
-      <label for="DigitalePalpation4">V.a. Organüberschreitung</label><br/><label class="left" style="vertical-align:top;"> Lokalisation:</label>
+	  echo 'class="right textfeld" />
+      <label for="DigitalePalpation4">V.a. Organüberschreitung</label><br/><label class="left textfeld" > Lokalisation:</label>
     <textarea name="DigPalKommentar" id="tx1">'.$_POST['DigPalKommentar'].'</textarea>
   </fieldset>
   <fieldset>
@@ -350,9 +350,8 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <label for="TransrektalerUltraschall2">dubios</label><br />
       <input type="radio" id="TransrektalerUltraschall3" name="TransrektalerUltraschall" value="suspekt" onclick="document.getElementById(\'tx2\').disabled=\'\'"';
 	  if ($_POST['TransrektalerUltraschall']=='suspekt') echo 'checked="checked" ';
-	  echo 'class="right"  style="vertical-align:top;"/>
-      <label for="TransrektalerUltraschall3">suspekt</label><br><label class="left" style="vertical-align:top;"> Lokalisation:</label>
-   
+	  echo 'class="right textfeld" />
+      <label for="TransrektalerUltraschall3">suspekt</label><br><label class="left textfeld">Lokalisation:</label>
 	<label>
       <textarea name="TransUltraKommentar" id="tx2">'.$_POST['TransUltraKommentar'].'</textarea>
     </label><br />
@@ -398,18 +397,18 @@ echo'	kg<br />
 	  if ($_POST['BiopsieErgebnis']) echo 'checked="checked"';
 	  echo' class="right"/>
       <label for="BiopsieErgebnis">Positiv</label>
-      <input type="text" name="BiopsieposFund" value="'.$_POST['BiopsieposFund'].'" size="5"/>
+      <input type="text" name="BiopsieposFund" value="'.$_POST['BiopsieposFund'].'" class="number" />
       /
-      <input type="text" name="BiopsieposGesamt" value="'.$_POST['BiopsieposGesamt'].'" size="5" />
+      <input type="text" name="BiopsieposGesamt" value="'.$_POST['BiopsieposGesamt'].'" class="number" />
     
     <br/>
       <input type="checkbox" id="PIN" name="PIN" value="1" ';
 	  if ($_POST['PIN']) echo 'checked="checked"';
 	  echo' class="right" />
       <label for="PIN">PIN</label>
-      <input type="text" name="PINFund" value="'.$_POST['PINFund'].'" size="5" />
+      <input type="text" name="PINFund" value="'.$_POST['PINFund'].'" class="number" />
       /
-      <input type="text" name="PINGesamt" value="'.$_POST['PINGesamt'].'" size="5" />
+      <input type="text" name="PINGesamt" value="'.$_POST['PINGesamt'].'" class="number" />
     <br/>
       <input type="checkbox" id="Prostatitis" name="Prostatitis" value="1" ';
 	  if ($_POST['Prostatitis']) echo 'checked="checked"';
@@ -418,27 +417,27 @@ echo'	kg<br />
     <br/>
     <br/>
     <label for="Gleason" class="left">Gleason:</label>
-      <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" size="5"';
+      <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" class="number';
 if (isset( $_POST['submit'] ) or (!$row==NULL))
-if ($_POST['Gleason1']<1 or $_POST['Gleason1'] > 5) {echo 'class="wrong" ';$_SESSION['fehler']=true;}
+if ($_POST['Gleason1']<1 or $_POST['Gleason1'] > 5) {echo ' wrong';$_SESSION['fehler']=true;}
 
-echo'	  />
+echo'" />
       +
-      <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" size="5"';
+      <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" class="number';
 if (isset( $_POST['submit'] ) or (!$row==NULL))
-	  if ($_POST['Gleason2']<1 or $_POST['Gleason2'] > 5) {echo 'class="wrong" ';$_SESSION['fehler']=true;}
-echo'	  />
+	  if ($_POST['Gleason2']<1 or $_POST['Gleason2'] > 5) {echo ' wrong';$_SESSION['fehler']=true;}
+echo'" />
       =';
 	  $_POST['Gleason3'] = $_POST['Gleason1'] + $_POST['Gleason2'];
 	  echo '
-      <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled size="5" />
+      <input type="text" name="Gleason3" value="'.$_POST['Gleason3'].'" disabled class="number" />
 	  <input type="hidden" name="Gleason3" value="'.$_POST['Gleason3'].'">
     <br/>';
 if (isset( $_POST['submit'] )or(!$row==NULL))
-	if ($_POST['Gleason1']>5 or $_POST['Gleason1']<1 or $_POST['Gleason2']>5 or $_POST['Gleason2']<1) {echo '<span class="right wrong">Werte müssen >1 und <=5 sein</span><br />';$_SESSION['fehler']=true;}
+	if ($_POST['Gleason1']>5 or $_POST['Gleason1']<1 or $_POST['Gleason2']>5 or $_POST['Gleason2']<1) {echo '<span class="right wrong">Werte müssen >=1 und <=5 sein</span><br />';$_SESSION['fehler']=true;}
 	echo'
     <label for="Helpap" class="left">Helpap-Grad:</label>
-      <select id="Helpap" name="Helpap" style="width: 60px; background: #ddd;">
+      <select id="Helpap" name="Helpap">
         <option> </option>
         <option'; if ($_POST['Helpap']=="G1a") echo" selected";
 		echo'> G1a</option>
@@ -455,7 +454,7 @@ if (isset( $_POST['submit'] )or(!$row==NULL))
       </select>
     <br>
     <label for="PIN3" class="left">PIN 3&deg;:</label>
-      <select id="PIN3" name="PIN3" style="width: 60px; background: #ddd;">
+      <select id="PIN3" name="PIN3">
         <option> </option>
         <option'; if ($_POST['PIN3']=="PIN 1") echo" selected";
 		echo'> PIN 1</option>
@@ -479,9 +478,9 @@ if (isset( $_POST['submit'] )or(!$row==NULL))
       <textarea id="BenigneKommentar" name="BenigneKommentar">'.$_POST['BenigneKommentar'].'</textarea>
     <br/>
     <label for="In" class="right">In</label>
-      <input type="text" id="In" name="In1" value="'.$_POST['In1'].'" size="5" />
+      <input type="text" id="In" name="In1" value="'.$_POST['In1'].'" class="number" />
       /
-      <input type="text" id="In" name="In2" value="'.$_POST['In2'].'" size="5" />
+      <input type="text" id="In" name="In2" value="'.$_POST['In2'].'" class="number" />
       Stanzen, Details siehe "Befundbericht-Prostatabiopsie"
   </fieldset>
   <fieldset>

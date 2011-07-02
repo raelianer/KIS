@@ -157,3 +157,13 @@ input:focus, textarea:focus {
 .rightPlus{
 	margin-left:35%;
 }
+.textfeld{
+	vertical-align:top;
+}
+#Helpap, #PIN3{
+	width: 75px;
+	background: #ddd;
+}
+.number{
+	width:50px;
+}
