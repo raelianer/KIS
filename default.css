@@ -161,28 +161,18 @@ input:focus, textarea:focus {
 .number {
 	width:50px;
 }
-/* Relativer Tooltip */
+
 .tooltip, .tooltip:link, .tooltip:visited, .tooltip:active {
 	position: relative;
 }
-.tooltip:hover {
-	background: transparent;
-}
+
 .tooltip span {
 	display: none;
 	text-decoration: none;
 }
-.tooltip:hover span {
-	display: block;
-	position: absolute;
-	margin-left:160px; width:130px;
-	left: 0;
-	z-index: 100;
-	color: #000000;
-	border:1px solid #000000;
-	background: #FFFFCC;
-	font: 12px Verdana, sans-serif;
-	text-align: left;
+
+.tooltip:hover {
+	background: transparent;
 }
 .tooltip span b {
 	display: block;
@@ -194,4 +184,17 @@ input:focus, textarea:focus {
 	background-color: gray;
 	border: 0px;
 	border-bottom: 1px solid black;
+}
+
+.tooltip:hover span {
+	display: block;
+	position: absolute;
+	margin-left:210px; width:130px;
+	left: 0;
+	z-index: 100;
+	color: #000000;
+	border:1px solid #000000;
+	background: #FFFFCC;
+	font: 12px Verdana, sans-serif;
+	text-align: left;
 }

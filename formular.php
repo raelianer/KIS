@@ -279,7 +279,7 @@ $_SESSION['fehler']=false;
 echo '<div id="headline">Protokoll prätherapeutische Prostatakonferenz';
 if (isset($_POST['submit'])) echo ' wurde gespeichert!';
 else if (isset( $_POST['delete'] )) echo ' wurde gelöscht!';
-else echo ' anlegen / ändern';
+else echo ' anzeigen / anlegen / ändern';
 
 echo'
 </div>';
@@ -287,10 +287,10 @@ echo'<form action="formular.php?'.SID.'" method="post">
   <fieldset>
     <legend>Patientendaten</legend><span class="tooltip">
 	<label for="Name" class="left">Name:</label>
-      <input type="text" id="Name" name="Name" value="'.$_POST['Name'].'" readonly="readonly" /><span>Daten sind nicht änderbar</span></span><br />
-	<span class="tooltip"><label for="Vorname" class="left">Vorname:</label><span>Daten sind nicht änderbar</span>
+      <input type="text" id="Name" name="Name" value="'.$_POST['Name'].'" readonly="readonly" /><span>Patientendaten sind nicht änderbar</span></span><br />
+	<span class="tooltip"><label for="Vorname" class="left">Vorname:</label><span>Patientendaten sind nicht änderbar</span>
       <input type="text" id="Vorname" name="Vorname" value="'.$_POST['Vorname'].'" readonly="readonly" /></span><br />
-	<span class="tooltip"><label for="Geburtsdatum" class="left">Geburtsdatum:</label><span>Daten sind nicht änderbar</span>
+	<span class="tooltip"><label for="Geburtsdatum" class="left">Geburtsdatum:</label><span>Patientendaten sind nicht änderbar</span>
       <input type="date" id="Geburtsdatum" name="Geburtsdatum" value="'.$_POST['Geburtsdatum'].'" readonly="readonly" /></span><br />
   </fieldset>
   <fieldset>
@@ -299,12 +299,12 @@ echo'<form action="formular.php?'.SID.'" method="post">
 	  if ($_POST['Praetherapeutisch']) echo 'checked="checked"';
 	  echo' class="right"/>
 	  <label for="Praetherapeutisch">Prätherapeutisch</label>
-    <br />
-    <label for="PSA" class="left">PSA:</label>
+    <br /><span class="tooltip">
+    <label for="PSA" class="left">PSA:</label><span>Beckman-Coulter Access Referenz- <br>bereich < 3,2</span>
       <input type="text" id="PSA" name="PSA" value="'.$_POST['PSA'].'" ';
 	  if ($_POST['PSA'] >= 3.2) {echo 'class="wrong" ';$_SESSION['fehler']=true;}
-	  echo'/>
-      ng/ml (Beckman-Coulter Access Referenzbereich < 3,2), <br/>';
+	  echo'/></span>
+      ng/ml <br/>';
 
 	  if ($_POST['PSA'] >= 3.2) {echo '<span class="right wrong">PSA zu hoch!</span><br />';$_SESSION['fehler']=true;}
 	  if ($_POST['PSA'] < 0) {echo '<span class="right wrong">PSA muss positiv sein!</span><br />';$_SESSION['fehler']=true;}
@@ -357,12 +357,12 @@ echo'<form action="formular.php?'.SID.'" method="post">
       <label for="TransrektalerUltraschall3">suspekt</label><br><label class="left textfeld">Lokalisation:</label>
 	<label>
       <textarea name="TransUltraKommentar" id="tx2">'.$_POST['TransUltraKommentar'].'</textarea>
-    </label><br />
-    <label for="IPSS" class="left">IPSS:</label>
+    </label><br /><span class="tooltip">
+    <label for="IPSS" class="left">IPSS:</label><span>Werte zwischen 0-35</span>
       <input type="text" id="IPSS" name="IPSS" value="'.$_POST['IPSS'].'"';
 	if ($_POST['IPSS'] > 35 or $_POST['IPSS'] < 0) {echo 'class="wrong" ';$_SESSION['fehler']=true;}
-	echo'	  />';
-    echo'  (0-35)</label>
+	echo'	  /></span>';
+    echo'</label>
     <br/>';
 	if ($_POST['IPSS'] > 35 or $_POST['IPSS'] < 0) {echo '<span class="right wrong">IPSS muss >=0 und <=35 sein !</span><br />';$_SESSION['fehler']=true;}
 	echo'
@@ -382,8 +382,8 @@ echo'	kg<br />
 	if ($_POST['Koerperlaenge'] == 0) $_POST['BMI'] = null;
 	else $_POST['BMI'] = round($_POST['Koerpergewicht'] / ($_POST['Koerperlaenge']/100 * $_POST['Koerperlaenge']/100));
 	
-	echo '
-    <input type="text" name="display" value="'.$_POST['BMI'].'" disabled class="right" /> (wird automatisch berechnet)
+	echo '<span class="tooltip"><label for="Name" class="left">BMI:</label><span>wird automatisch berechnet</span>
+    <input type="text" name="display" value="'.$_POST['BMI'].'" disabled="disabled" /></span>
 	<input type="hidden" name="BMI" value="'.$_POST['BMI'].'">
   </fieldset>
   <fieldset>
@@ -400,26 +400,26 @@ echo'	kg<br />
 	  if ($_POST['BiopsieErgebnis']) echo 'checked="checked"';
 	  echo' class="right"/>
       <label for="BiopsieErgebnis">Positiv</label>
-      <input type="text" name="BiopsieposFund" value="'.$_POST['BiopsieposFund'].'" class="number" />
+      <input type="text" id="pca1" name="BiopsieposFund" value="'.$_POST['BiopsieposFund'].'" class="number"  />
       /
-      <input type="text" name="BiopsieposGesamt" value="'.$_POST['BiopsieposGesamt'].'" class="number" />
+      <input type="text" id="pca2" name="BiopsieposGesamt" value="'.$_POST['BiopsieposGesamt'].'" class="number"  />
     
     <br/>
       <input type="checkbox" id="PIN" name="PIN" value="1" ';
 	  if ($_POST['PIN']) echo 'checked="checked"';
 	  echo' class="right" />
       <label for="PIN">PIN</label>
-      <input type="text" name="PINFund" value="'.$_POST['PINFund'].'" class="number" />
+      <input type="text" id="pin1" name="PINFund" value="'.$_POST['PINFund'].'" class="number" />
       /
-      <input type="text" name="PINGesamt" value="'.$_POST['PINGesamt'].'" class="number" />
+      <input type="text" id="pin2" name="PINGesamt" value="'.$_POST['PINGesamt'].'" class="number" />
     <br/>
       <input type="checkbox" id="Prostatitis" name="Prostatitis" value="1" ';
 	  if ($_POST['Prostatitis']) echo 'checked="checked"';
 	  echo' class="right" />
       <label for="Prostatitis">Stärkergradige Prostatitis</label>
     <br/>
-    <br/>
-    <label for="Gleason" class="left">Gleason:</label>
+    <br/><span class="tooltip">
+    <label for="Gleason" class="left">Gleason:</label><span> Werte zwischen 1-5</span>
       <input type="text" id="Gleason" name="Gleason1" value="'.$_POST['Gleason1'].'" class="number';
 if (isset( $_POST['submit'] ) or (!$row==NULL))
 if ($_POST['Gleason1']<1 or $_POST['Gleason1'] > 5) {echo ' wrong';$_SESSION['fehler']=true;}
@@ -429,7 +429,7 @@ echo'" />
       <input type="text" id="Gleason" name="Gleason2" value="'.$_POST['Gleason2'].'" class="number';
 if (isset( $_POST['submit'] ) or (!$row==NULL))
 	  if ($_POST['Gleason2']<1 or $_POST['Gleason2'] > 5) {echo ' wrong';$_SESSION['fehler']=true;}
-echo'" />
+echo'" /></span>
       =';
 	  $_POST['Gleason3'] = $_POST['Gleason1'] + $_POST['Gleason2'];
 	  echo '
